@@ -239,6 +239,11 @@ enable_service() {
 
     if [ $copied -eq 0 ]; then
         backup "$svc" "$f" || { warn "couldn't back up $f, nothing changed"; return 1; }
+    else
+        # Remember what was copied, so "disable" still recognizes an unchanged
+        # copy after a package update changed the vendor file.
+        mkdir -p -- "$BACKUP_DIR" && chmod 700 -- "$STATE_DIR" "$BACKUP_DIR" 2>/dev/null
+        cp -p -- "$vendor" "$BACKUP_DIR/$svc.vendor" || { warn "couldn't back up $vendor, nothing changed"; return 1; }
     fi
     replace_file "$f" "$out" "$ref" || { warn "couldn't write $f"; return 1; }
     echo "$svc: enabled"
@@ -263,9 +268,10 @@ disable_service() {
 
     backup "$svc" "$f" || { warn "couldn't back up $f, nothing changed"; return 1; }
 
-    if [ $copied -eq 1 ] && [ -f "$vendor" ] && cmp -s -- "$out" "$vendor"; then
+    if [ $copied -eq 1 ] && { { [ -f "$vendor" ] && cmp -s -- "$out" "$vendor"; } ||
+            { [ -f "$BACKUP_DIR/$svc.vendor" ] && cmp -s -- "$out" "$BACKUP_DIR/$svc.vendor"; }; }; then
         # Our own copy of the vendor file and nothing else changed in it.
-        rm -f -- "$f" || { warn "couldn't remove $f"; return 1; }
+        rm -f -- "$f" "$BACKUP_DIR/$svc.vendor" || { warn "couldn't remove $f"; return 1; }
         echo "$svc: disabled (removed the copy of ${vendor#"$ROOT"})"
         return 0
     fi
