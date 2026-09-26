@@ -278,7 +278,8 @@ ItemPage {
                     visible: _screenView.count > 0
                 }
 
-                // The monitors as they are arranged: click one to set it up below
+                // The monitors as they are arranged: click one to set it up below, drag it
+                // to move it
                 Item {
                     id: arrangement
                     Layout.fillWidth: true
@@ -303,6 +304,45 @@ ItemPage {
                     readonly property real offsetX: (width - bounds.width * factor) / 2
                     readonly property real offsetY: (height - bounds.height * factor) / 2
 
+                    // Where a monitor dropped with its top-left at (px, py) ends up: touching
+                    // another monitor along an edge, aligned to its top/bottom or left/right,
+                    // wherever is closest and doesn't overlap anything (like arandr, minus gaps)
+                    function snap(index, px, py) {
+                        var me = monitorRepeater.itemAt(index).geo
+                        var w = me.width, h = me.height
+                        var others = []
+                        for (var i = 0; i < monitorRepeater.count; ++i) {
+                            if (i !== index && monitorRepeater.itemAt(i))
+                                others.push(monitorRepeater.itemAt(i).geo)
+                        }
+                        function overlaps(x, y) {
+                            for (var k = 0; k < others.length; ++k) {
+                                var o = others[k]
+                                if (x < o.x + o.width && x + w > o.x && y < o.y + o.height && y + h > o.y)
+                                    return true
+                            }
+                            return false
+                        }
+                        var best = null, bestDistance = Infinity
+                        for (var j = 0; j < others.length; ++j) {
+                            var o = others[j]
+                            var spots = [
+                                [o.x + o.width, o.y], [o.x + o.width, o.y + o.height - h],
+                                [o.x - w, o.y], [o.x - w, o.y + o.height - h],
+                                [o.x, o.y - h], [o.x + o.width - w, o.y - h],
+                                [o.x, o.y + o.height], [o.x + o.width - w, o.y + o.height]
+                            ]
+                            for (var n = 0; n < spots.length; ++n) {
+                                var d = Math.hypot(spots[n][0] - px, spots[n][1] - py)
+                                if (d < bestDistance && !overlaps(spots[n][0], spots[n][1])) {
+                                    bestDistance = d
+                                    best = Qt.point(Math.round(spots[n][0]), Math.round(spots[n][1]))
+                                }
+                            }
+                        }
+                        return best
+                    }
+
                     Repeater {
                         id: monitorRepeater
                         model: screen.outputModel
@@ -324,8 +364,13 @@ ItemPage {
 
                             onGeoChanged: arrangement.revision++
 
-                            x: arrangement.offsetX + (geo.x - arrangement.bounds.x) * arrangement.factor + 3
-                            y: arrangement.offsetY + (geo.y - arrangement.bounds.y) * arrangement.factor + 3
+                            // How far it's being dragged, in pixels of the drawing
+                            property real dragX: 0
+                            property real dragY: 0
+                            z: mouseArea.pressed ? 1 : 0
+
+                            x: arrangement.offsetX + (geo.x - arrangement.bounds.x) * arrangement.factor + 3 + dragX
+                            y: arrangement.offsetY + (geo.y - arrangement.bounds.y) * arrangement.factor + 3 + dragY
                             width: geo.width * arrangement.factor - 6
                             height: geo.height * arrangement.factor - 6
                             radius: LingmoUI.Theme.smallRadius
@@ -366,12 +411,49 @@ ItemPage {
                             }
 
                             MouseArea {
+                                id: mouseArea
                                 anchors.fill: parent
-                                cursorShape: Qt.PointingHandCursor
-                                onClicked: _screenView.currentIndex = index
+                                cursorShape: pressed ? Qt.ClosedHandCursor : Qt.OpenHandCursor
+                                property point start
+
+                                onPressed: (mouse) => {
+                                    start = mapToItem(arrangement, mouse.x, mouse.y)
+                                    _screenView.currentIndex = index
+                                }
+                                onPositionChanged: (mouse) => {
+                                    var p = mapToItem(arrangement, mouse.x, mouse.y)
+                                    monitor.dragX = p.x - start.x
+                                    monitor.dragY = p.y - start.y
+                                }
+                                onReleased: {
+                                    var moved = Math.abs(monitor.dragX) + Math.abs(monitor.dragY) > 4
+                                    // Back to the drawing's own coordinates: the whole desktop
+                                    var px = monitor.geo.x + monitor.dragX / arrangement.factor
+                                    var py = monitor.geo.y + monitor.dragY / arrangement.factor
+                                    monitor.dragX = 0
+                                    monitor.dragY = 0
+                                    if (!moved || !model.enabled)
+                                        return
+                                    var spot = arrangement.snap(index, px, py)
+                                    if (!spot || (spot.x === monitor.geo.x && spot.y === monitor.geo.y))
+                                        return
+                                    // The model takes positions in its own space, which only
+                                    // differs from the drawing's by an offset
+                                    var offset = Qt.point(model.position.x - model.normalizedPosition.x,
+                                                          model.position.y - model.normalizedPosition.y)
+                                    model.position = Qt.point(spot.x + offset.x, spot.y + offset.y)
+                                    screen.save()
+                                }
                             }
                         }
                     }
+                }
+
+                Label {
+                    Layout.alignment: Qt.AlignHCenter
+                    visible: arrangement.visible
+                    text: qsTr("Drag the monitors to match how they sit on your desk")
+                    color: LingmoUI.Theme.disabledTextColor
                 }
 
                 ListView {

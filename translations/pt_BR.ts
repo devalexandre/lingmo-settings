@@ -521,7 +521,7 @@
         <translation>Tela</translation>
     </message>
     <message>
-        <location line="+86"/>
+        <location line="+131"/>
         <source>Off</source>
         <translation>Desligada</translation>
     </message>
@@ -531,7 +531,12 @@
         <translation>Principal</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+48"/>
+        <source>Drag the monitors to match how they sit on your desk</source>
+        <translation>Arraste os monitores para ficarem como estão na sua mesa</translation>
+    </message>
+    <message>
+        <location line="+39"/>
         <source>Screen Name</source>
         <translation>Nome da tela</translation>
     </message>
@@ -1189,7 +1194,7 @@
         <translation>Pesquisar (ex.: Português, us)</translation>
     </message>
     <message>
-        <location filename="../src/qml/Display/Main.qml" line="-439"/>
+        <location filename="../src/qml/Display/Main.qml" line="-521"/>
         <source>Night Light</source>
         <translation>Luz noturna</translation>
     </message>
