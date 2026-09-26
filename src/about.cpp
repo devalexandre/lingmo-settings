@@ -225,7 +225,7 @@ QString About::cpuInfo()
 
 void About::openUpdator()
 {
-    QProcess::startDetached("lingmo-updator", QStringList());
+    QProcess::startDetached("lingmo-updater", QStringList());
 }
 
 qlonglong About::calculateTotalRam() const
