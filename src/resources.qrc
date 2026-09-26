@@ -86,6 +86,7 @@
         <file>images/sidebar/all/accessibility.svg</file>
         <file>images/sidebar/all/keyboard.svg</file>
         <file>images/sidebar/all/startup.svg</file>
+        <file>images/sidebar/all/effects.svg</file>
         <file>images/sidebar/all/battery.svg</file>
         <file>images/sidebar/all/bluetooth.svg</file>
         <file>images/sidebar/all/display.svg</file>
@@ -149,6 +150,7 @@
         <file>qml/Accessibility/Main.qml</file>
         <file>qml/Shortcuts/Main.qml</file>
         <file>qml/Autostart/Main.qml</file>
+        <file>qml/Effects/Main.qml</file>
         <file>images/sidebar/all/sound.svg</file>
         <file>images/light/audio-volume-high-symbolic.svg</file>
         <file>images/light/audio-volume-low-symbolic.svg</file>

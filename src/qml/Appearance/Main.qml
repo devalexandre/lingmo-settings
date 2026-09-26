@@ -127,61 +127,6 @@ ItemPage {
             }
 
             RoundedItem {
-                RowLayout {
-                    spacing: LingmoUI.Units.largeSpacing * 2
-
-                    Label {
-                        text: qsTr("Minimize animation")
-                    }
-
-                    TabBar {
-                        Layout.fillWidth: true
-                        currentIndex: appearance.minimiumAnimation
-                        onCurrentIndexChanged: appearance.minimiumAnimation = currentIndex
-
-                        TabButton {
-                            text: qsTr("Default")
-                        }
-
-                        TabButton {
-                            text: qsTr("Magic Lamp")
-                        }
-                    }
-                }
-            }
-
-            RoundedItem {
-                RowLayout {
-                    spacing: LingmoUI.Units.largeSpacing * 2
-
-                    ColumnLayout {
-                        spacing: 0
-                        Layout.fillWidth: true
-
-                        Label {
-                            text: qsTr("Wobbly windows")
-                        }
-
-                        Label {
-                            text: appearance.wobblyWindowsSupported ? qsTr("Windows jiggle like jelly while you drag them")
-                                                                    : qsTr("Requires video acceleration (GPU)")
-                            color: LingmoUI.Theme.disabledTextColor
-                            wrapMode: Text.WordWrap
-                            Layout.fillWidth: true
-                        }
-                    }
-
-                    Switch {
-                        checked: appearance.wobblyWindows
-                        enabled: appearance.systemEffects && appearance.wobblyWindowsSupported
-                        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                        onToggled: appearance.wobblyWindows = checked
-                        rightPadding: 0
-                    }
-                }
-            }
-
-            RoundedItem {
                 Label {
                     text: qsTr("Accent color")
                     color: LingmoUI.Theme.disabledTextColor

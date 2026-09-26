@@ -113,6 +113,15 @@ Item {
         }
 
         ListElement {
+            title: qsTr("Effects")
+            name: "effects"
+            page: "qrc:/qml/Effects/Main.qml"
+            iconSource: "effects.svg"
+            iconColor: "#BF5AF2"
+            category: qsTr("Display and appearance")
+        }
+
+        ListElement {
             title: qsTr("Background")
             name: "background"
             page: "qrc:/qml/Wallpaper/Main.qml"

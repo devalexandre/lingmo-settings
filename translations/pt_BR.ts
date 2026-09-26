@@ -1783,4 +1783,138 @@
         <translation>Requer aceleração de vídeo (GPU)</translation>
     </message>
 </context>
+<context>
+    <name>SideBar</name>
+    <message>
+        <source>Effects</source>
+        <translation>Efeitos</translation>
+    </message>
+</context>
+<context>
+    <name>Main</name>
+    <message>
+        <source>Effects</source>
+        <translation>Efeitos</translation>
+    </message>
+    <message>
+        <source>Windows</source>
+        <translation>Janelas</translation>
+    </message>
+    <message>
+        <source>Open and close</source>
+        <translation>Abrir e fechar</translation>
+    </message>
+    <message>
+        <source>Scale</source>
+        <translation>Escala</translation>
+    </message>
+    <message>
+        <source>Glide</source>
+        <translation>Deslizar</translation>
+    </message>
+    <message>
+        <source>Fall apart</source>
+        <translation>Desfazer ao fechar</translation>
+    </message>
+    <message>
+        <source>Closed windows break into pieces</source>
+        <translation>Janelas fechadas se desfazem em pedaços</translation>
+    </message>
+    <message>
+        <source>Animated maximize</source>
+        <translation>Maximizar animado</translation>
+    </message>
+    <message>
+        <source>Windows grow smoothly when maximized or restored</source>
+        <translation>As janelas crescem suavemente ao maximizar ou restaurar</translation>
+    </message>
+    <message>
+        <source>Translucent while moving</source>
+        <translation>Transparente ao mover</translation>
+    </message>
+    <message>
+        <source>See what is behind a window while you drag it</source>
+        <translation>Veja o que está atrás da janela enquanto a arrasta</translation>
+    </message>
+    <message>
+        <source>Dim inactive windows</source>
+        <translation>Escurecer janelas inativas</translation>
+    </message>
+    <message>
+        <source>The window you are using stands out</source>
+        <translation>A janela em uso fica em destaque</translation>
+    </message>
+    <message>
+        <source>Grey out frozen apps</source>
+        <translation>Apps travados em cinza</translation>
+    </message>
+    <message>
+        <source>Apps that stop responding turn grey</source>
+        <translation>Apps que param de responder ficam cinza</translation>
+    </message>
+    <message>
+        <source>Desktop and menus</source>
+        <translation>Área de trabalho e menus</translation>
+    </message>
+    <message>
+        <source>Switching desktops</source>
+        <translation>Trocar de área de trabalho</translation>
+    </message>
+    <message>
+        <source>Slide</source>
+        <translation>Deslizar</translation>
+    </message>
+    <message>
+        <source>Fade</source>
+        <translation>Esmaecer</translation>
+    </message>
+    <message>
+        <source>Show desktop</source>
+        <translation>Mostrar área de trabalho</translation>
+    </message>
+    <message>
+        <source>Windows move out to the corners to show the desktop</source>
+        <translation>As janelas se afastam para os cantos e mostram a área de trabalho</translation>
+    </message>
+    <message>
+        <source>Animated menus</source>
+        <translation>Menus animados</translation>
+    </message>
+    <message>
+        <source>Menus and tooltips fade and grow in</source>
+        <translation>Menus e dicas aparecem com animação</translation>
+    </message>
+    <message>
+        <source>Window switcher (Alt+Tab)</source>
+        <translation>Alternador de janelas (Alt+Tab)</translation>
+    </message>
+    <message>
+        <source>Strip</source>
+        <translation>Faixa</translation>
+    </message>
+    <message>
+        <source>Flip</source>
+        <translation>Folhear</translation>
+    </message>
+    <message>
+        <source>Windows stacked like the pages of a book; each Tab turns a page.</source>
+        <translation>As janelas empilhadas como folhas de um livro; cada Tab vira uma página.</translation>
+    </message>
+    <message>
+        <source>Window previews side by side.</source>
+        <translation>Prévias das janelas lado a lado.</translation>
+    </message>
+    <message>
+        <source>Mouse</source>
+        <translation>Mouse</translation>
+    </message>
+    <message>
+        <source>Show mouse clicks</source>
+        <translation>Mostrar cliques do mouse</translation>
+    </message>
+    <message>
+        <source>A ring appears where you click, handy for recordings</source>
+        <translation>Um anel aparece onde você clica, útil para gravações</translation>
+    </message>
+</context>
 </TS>
