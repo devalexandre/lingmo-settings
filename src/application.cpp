@@ -34,6 +34,7 @@
 #include "datetime/time.h"
 #include "datetime/timezonemap.h"
 #include "defaultapplications.h"
+#include "fingerprint.h"
 #include "fonts/fonts.h"
 #include "fontsmodel.h"
 #include "hostname.h"
@@ -94,6 +95,7 @@ Application::Application(std::shared_ptr<QQmlApplicationEngine> engine)
     qmlRegisterType<NightLight>(uri, 1, 0, "NightLight");
     qmlRegisterType<KeyboardLayouts>(uri, 1, 0, "KeyboardLayouts");
     qmlRegisterType<CameraSettings>(uri, 1, 0, "CameraSettings");
+    qmlRegisterType<Fingerprint>(uri, 1, 0, "Fingerprint");
     qmlRegisterSingletonType<Password>(uri, 1, 0, "Password", passwordSingleton);
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)

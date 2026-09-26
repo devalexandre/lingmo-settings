@@ -114,3 +114,7 @@ set(INCLUDE_INSTALL_DIR ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
 install(DIRECTORY ${EXPORT_HEADERS} DESTINATION ${INCLUDE_INSTALL_DIR})
 
 install(FILES "tools/auto-install-policy/org.lingmo.settings.update.lminstall.policy" DESTINATION "${CMAKE_INSTALL_DATADIR}/polkit-1/actions/")
+
+# Fingerprint login: PAM helper run through pkexec (the policy names its path)
+install(PROGRAMS fingerprint/fingerprint-pam DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}")
+install(FILES fingerprint/org.lingmo.settings.fingerprint-pam.policy DESTINATION "${CMAKE_INSTALL_DATADIR}/polkit-1/actions/")

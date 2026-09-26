@@ -87,6 +87,312 @@
     </message>
 </context>
 <context>
+    <name>Fingerprint</name>
+    <message>
+        <location filename="../src/fingerprint.cpp" line="+396"/>
+        <source>You are not allowed to use the fingerprint reader.</source>
+        <translation>Você não tem permissão para usar o leitor de digital.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>The fingerprint reader is being used by another program.</source>
+        <translation>O leitor de digital está sendo usado por outro programa.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>The fingerprint reader couldn&apos;t be opened.</source>
+        <translation>Não foi possível abrir o leitor de digital.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>The fingerprint reader was disconnected.</source>
+        <translation>O leitor de digital foi desconectado.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The fingerprints couldn&apos;t be deleted.</source>
+        <translation>Não foi possível excluir as digitais.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The fingerprint reader didn&apos;t respond.</source>
+        <translation>O leitor de digital não respondeu.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Fingerprint reader error: %1</source>
+        <translation>Erro no leitor de digital: %1</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Left thumb</source>
+        <translation>Polegar esquerdo</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Left index finger</source>
+        <translation>Indicador esquerdo</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Left middle finger</source>
+        <translation>Médio esquerdo</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Left ring finger</source>
+        <translation>Anelar esquerdo</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Left little finger</source>
+        <translation>Mínimo esquerdo</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Right thumb</source>
+        <translation>Polegar direito</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Right index finger</source>
+        <translation>Indicador direito</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Right middle finger</source>
+        <translation>Médio direito</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Right ring finger</source>
+        <translation>Anelar direito</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Right little finger</source>
+        <translation>Mínimo direito</translation>
+    </message>
+    <message>
+        <location line="+76"/>
+        <source>You are not authorized to change this setting.</source>
+        <translation>Você não tem autorização para alterar esta configuração.</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location line="+5"/>
+        <source>Couldn&apos;t change fingerprint authentication: %1</source>
+        <translation>Não foi possível alterar a autenticação por digital: %1</translation>
+    </message>
+</context>
+<context>
+    <name>FingerprintEnrollDialog</name>
+    <message>
+        <location filename="../src/qml/User/FingerprintEnrollDialog.qml" line="+51"/>
+        <source>Add fingerprint</source>
+        <translation>Adicionar digital</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Swipe your finger across the reader</source>
+        <translation>Deslize o dedo pelo leitor</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Place your finger on the reader</source>
+        <translation>Coloque o dedo no leitor</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Swipe your finger again</source>
+        <translation>Deslize o dedo novamente</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Now touch the reader with the edges of your finger</source>
+        <translation>Agora toque o leitor com as bordas do dedo</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Lift your finger and place it on the reader again</source>
+        <translation>Levante o dedo e coloque-o no leitor novamente</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>You can now use this finger to log in, unlock and authorize.</source>
+        <translation>Você já pode usar este dedo para entrar, desbloquear e autorizar.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>The fingerprint couldn&apos;t be registered. Try again.</source>
+        <translation>Não foi possível cadastrar a digital. Tente novamente.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>The reader has no room for another fingerprint. Delete one first.</source>
+        <translation>O leitor não tem espaço para outra digital. Exclua uma primeiro.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>This fingerprint is already registered.</source>
+        <translation>Esta digital já está cadastrada.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>The fingerprint reader was disconnected.</source>
+        <translation>O leitor de digital foi desconectado.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>The fingerprint reader reported an unknown error.</source>
+        <translation>O leitor de digital informou um erro desconhecido.</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>The reading wasn&apos;t clear. Try again.</source>
+        <translation>A leitura não ficou clara. Tente novamente.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The swipe was too short. Try again.</source>
+        <translation>O deslize foi curto demais. Tente novamente.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Your finger wasn&apos;t centered on the reader. Try again.</source>
+        <translation>O dedo não estava centralizado no leitor. Tente novamente.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Remove your finger and try again.</source>
+        <translation>Retire o dedo e tente novamente.</translation>
+    </message>
+    <message>
+        <location line="+108"/>
+        <source>Choose the finger you want to register. You will touch the reader several times.</source>
+        <translation>Escolha o dedo que deseja cadastrar. Você tocará o leitor várias vezes.</translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>%1 of %2 touches</source>
+        <translation>%1 de %2 toques</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Fingerprint registered</source>
+        <translation>Digital cadastrada</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Registration failed</source>
+        <translation>Falha no cadastro</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Close</source>
+        <translation>Fechar</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Try again</source>
+        <translation>Tentar novamente</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Start</source>
+        <translation>Começar</translation>
+    </message>
+</context>
+<context>
+    <name>FingerprintSection</name>
+    <message>
+        <location filename="../src/qml/User/FingerprintSection.qml" line="+65"/>
+        <source>Fingerprints</source>
+        <translation>Digitais</translation>
+    </message>
+    <message>
+        <location line="+46"/>
+        <source>No fingerprint reader was found. Connect a reader and open this page again.</source>
+        <translation>Nenhum leitor de digital foi encontrado. Conecte um leitor e abra esta página novamente.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Fingerprint support is not installed. Install the fprintd package to use a fingerprint reader.</source>
+        <translation>O suporte a digitais não está instalado. Instale o pacote fprintd para usar um leitor de digital.</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>No fingerprint registered yet.</source>
+        <translation>Nenhuma digital cadastrada ainda.</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Delete</source>
+        <translation>Excluir</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Add fingerprint</source>
+        <translation>Adicionar digital</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <location line="+104"/>
+        <source>Delete all</source>
+        <translation>Excluir todas</translation>
+    </message>
+    <message>
+        <location line="-79"/>
+        <source>Use fingerprint to log in, unlock and authorize</source>
+        <translation>Usar digital para entrar, desbloquear e autorizar</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>The fingerprint-pam helper of Lingmo Settings is missing, so this can&apos;t be changed here.</source>
+        <translation>O auxiliar fingerprint-pam das Configurações do Lingmo não está instalado, então isto não pode ser alterado aqui.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>The PAM module pam_fprintd is missing. Install the fprintd package.</source>
+        <translation>O módulo PAM pam_fprintd não está instalado. Instale o pacote fprintd.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Fingerprint authentication is only partly set up. Turn it on again to repair it.</source>
+        <translation>A autenticação por digital está configurada só em parte. Ative-a de novo para corrigir.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Register a fingerprint first.</source>
+        <translation>Cadastre uma digital primeiro.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>The login screen, the lock screen, administrator prompts and sudo will accept your fingerprint. Your password keeps working.</source>
+        <translation>A tela de login, a tela de bloqueio, os pedidos de administrador e o sudo aceitarão sua digital. Sua senha continua funcionando.</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Delete all fingerprints?</source>
+        <translation>Excluir todas as digitais?</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>You will have to register them again to use the fingerprint reader.</source>
+        <translation>Você precisará cadastrá-las novamente para usar o leitor de digital.</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+</context>
+<context>
     <name>FinishedPage</name>
     <message>
         <location filename="../src/qml/SystemUpdate/FinishedPage.qml" line="+52"/>
@@ -722,7 +1028,7 @@
         <translation>Usuário</translation>
     </message>
     <message>
-        <location line="+70"/>
+        <location line="+74"/>
         <source>Add new user</source>
         <translation>Adicionar novo usuário</translation>
     </message>

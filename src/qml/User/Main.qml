@@ -82,6 +82,10 @@ ItemPage {
                 }
             }
 
+            // Fingerprints of the logged-in user
+            FingerprintSection {
+            }
+
             // Add new user.
             RoundedItem {
                 id: newUserItem

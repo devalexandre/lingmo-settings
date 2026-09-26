@@ -105,6 +105,10 @@
         <file>images/dark/checked.svg</file>
         <file>qml/About/Main.qml</file>
         <file>qml/User/Main.qml</file>
+        <file>qml/User/FingerprintSection.qml</file>
+        <file>qml/User/FingerprintEnrollDialog.qml</file>
+        <file>images/light/fingerprint.svg</file>
+        <file>images/dark/fingerprint.svg</file>
         <file>qml/Appearance/Main.qml</file>
         <file>qml/Display/Main.qml</file>
         <file>qml/Battery/Main.qml</file>
