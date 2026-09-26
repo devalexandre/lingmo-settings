@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.4
+import QtQuick 2.15
 import QtQuick.Controls 2.4
 import QtQuick.Layouts 1.3
 import Lingmo.Settings 1.0
@@ -35,6 +35,10 @@ ItemPage {
 
     Brightness {
         id: brightness
+    }
+
+    NightLight {
+        id: nightLight
     }
 
     CS.Screen {
@@ -115,6 +119,153 @@ ItemPage {
 
                 Item {
                     height: LingmoUI.Units.smallSpacing / 2
+                }
+            }
+
+            // Blue light filter, applied by lingmo-settings-daemon
+            RoundedItem {
+                visible: nightLight.available
+
+                Label {
+                    text: qsTr("Night Light")
+                    color: LingmoUI.Theme.disabledTextColor
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: LingmoUI.Units.largeSpacing * 2
+
+                    Label {
+                        text: qsTr("Warmer colours on the screen reduce blue light and eye strain at night")
+                        wrapMode: Text.WordWrap
+                        Layout.fillWidth: true
+                    }
+
+                    Switch {
+                        checked: nightLight.enabled
+                        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+                        rightPadding: 0
+                        onToggled: nightLight.enabled = checked
+                    }
+                }
+
+                GridLayout {
+                    Layout.fillWidth: true
+                    columns: 2
+                    columnSpacing: LingmoUI.Units.largeSpacing * 1.5
+                    rowSpacing: LingmoUI.Units.largeSpacing * 1.5
+                    enabled: nightLight.enabled
+                    opacity: enabled ? 1.0 : 0.5
+
+                    Label {
+                        text: qsTr("Temperature")
+                    }
+
+                    RowLayout {
+                        Layout.fillWidth: true
+                        spacing: LingmoUI.Units.largeSpacing
+
+                        Label {
+                            text: qsTr("Cooler")
+                            color: LingmoUI.Theme.disabledTextColor
+                        }
+
+                        Timer {
+                            id: temperatureTimer
+                            interval: 100
+                            onTriggered: nightLight.temperature = temperatureSlider.value
+                        }
+
+                        // Warmer to the right
+                        Slider {
+                            id: temperatureSlider
+                            Layout.fillWidth: true
+                            from: nightLight.maxTemperature
+                            to: nightLight.minTemperature
+                            stepSize: 100
+                            value: nightLight.temperature
+                            onMoved: temperatureTimer.start()
+
+                            ToolTip {
+                                parent: temperatureSlider.handle
+                                visible: temperatureSlider.pressed
+                                text: temperatureSlider.value.toFixed(0) + " K"
+                            }
+                        }
+
+                        Label {
+                            text: qsTr("Warmer")
+                            color: LingmoUI.Theme.disabledTextColor
+                        }
+                    }
+
+                    Label {
+                        text: qsTr("Schedule")
+                    }
+
+                    TabBar {
+                        Layout.fillWidth: true
+                        currentIndex: nightLight.mode
+
+                        TabButton {
+                            text: qsTr("Always")
+                            onClicked: nightLight.mode = 0
+                        }
+
+                        TabButton {
+                            text: qsTr("Custom hours")
+                            onClicked: nightLight.mode = 1
+                        }
+                    }
+
+                    Item {
+                        width: 1
+                        visible: nightLight.mode === 1
+                    }
+
+                    RowLayout {
+                        visible: nightLight.mode === 1
+                        spacing: LingmoUI.Units.largeSpacing
+
+                        function saveSchedule() {
+                            if (!nightLight.setSchedule(startField.text, endField.text)) {
+                                startField.text = nightLight.startTime
+                                endField.text = nightLight.endTime
+                            }
+                        }
+
+                        Label {
+                            text: qsTr("From")
+                        }
+
+                        TextField {
+                            id: startField
+                            text: nightLight.startTime
+                            Layout.preferredWidth: 80
+                            horizontalAlignment: Text.AlignHCenter
+                            inputMethodHints: Qt.ImhTime
+                            validator: RegularExpressionValidator { regularExpression: /^([01]?\d|2[0-3]):[0-5]\d$/ }
+                            onEditingFinished: parent.saveSchedule()
+                        }
+
+                        Label {
+                            text: qsTr("To")
+                        }
+
+                        TextField {
+                            id: endField
+                            text: nightLight.endTime
+                            Layout.preferredWidth: 80
+                            horizontalAlignment: Text.AlignHCenter
+                            inputMethodHints: Qt.ImhTime
+                            validator: RegularExpressionValidator { regularExpression: /^([01]?\d|2[0-3]):[0-5]\d$/ }
+                            onEditingFinished: parent.saveSchedule()
+                        }
+
+                        Item {
+                            Layout.fillWidth: true
+                        }
+                    }
                 }
             }
 

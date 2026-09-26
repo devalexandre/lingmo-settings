@@ -212,6 +212,15 @@ Item {
         }
 
         ListElement {
+            title: qsTr("Keyboard")
+            name: "keyboard"
+            page: "qrc:/qml/Keyboard/Main.qml"
+            iconSource: "keyboard-layout.svg"
+            iconColor: "#34AADC"
+            category: qsTr("System")
+        }
+
+        ListElement {
             title: qsTr("Shortcuts")
             name: "shortcuts"
             page: "qrc:/qml/Shortcuts/Main.qml"

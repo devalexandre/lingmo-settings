@@ -184,6 +184,45 @@
     </message>
 </context>
 <context>
+    <name>KeyboardLayouts</name>
+    <message>
+        <source>None</source>
+        <translation>Nenhum</translation>
+    </message>
+    <message>
+        <source>Alt+Shift</source>
+        <translation>Alt+Shift</translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift</source>
+        <translation>Ctrl+Shift</translation>
+    </message>
+    <message>
+        <source>Super+Space</source>
+        <translation>Super+Espaço</translation>
+    </message>
+    <message>
+        <source>Alt+Space</source>
+        <translation>Alt+Espaço</translation>
+    </message>
+    <message>
+        <source>Both Shift keys</source>
+        <translation>As duas teclas Shift</translation>
+    </message>
+    <message>
+        <source>Caps Lock</source>
+        <translation>Caps Lock</translation>
+    </message>
+    <message>
+        <source>Right Alt</source>
+        <translation>Alt direito</translation>
+    </message>
+    <message>
+        <source>Menu key</source>
+        <translation>Tecla Menu</translation>
+    </message>
+</context>
+<context>
     <name>Main</name>
     <message>
         <location filename="../src/qml/About/Main.qml" line="14"/>
@@ -1115,6 +1154,82 @@
         <source>Update</source>
         <translation>Atualizar</translation>
     </message>
+    <message>
+        <source>Keyboard</source>
+        <translation>Teclado</translation>
+    </message>
+    <message>
+        <source>Input layouts</source>
+        <translation>Layouts de teclado</translation>
+    </message>
+    <message>
+        <source>Add layout</source>
+        <translation>Adicionar layout</translation>
+    </message>
+    <message>
+        <source>The settings service is not running</source>
+        <translation>O serviço de configurações não está em execução</translation>
+    </message>
+    <message>
+        <source>Move up</source>
+        <translation>Mover para cima</translation>
+    </message>
+    <message>
+        <source>Move down</source>
+        <translation>Mover para baixo</translation>
+    </message>
+    <message>
+        <source>Switch layouts with</source>
+        <translation>Alternar layouts com</translation>
+    </message>
+    <message>
+        <source>With more than one layout, the status bar shows the current one: click it to switch, or right click to pick one.</source>
+        <translation>Com mais de um layout, a barra de status mostra o atual: clique nele para alternar ou clique com o botão direito para escolher um.</translation>
+    </message>
+    <message>
+        <source>Search (e.g. Portuguese, us)</source>
+        <translation>Pesquisar (ex.: Português, us)</translation>
+    </message>
+    <message>
+        <source>Night Light</source>
+        <translation>Luz noturna</translation>
+    </message>
+    <message>
+        <source>Warmer colours on the screen reduce blue light and eye strain at night</source>
+        <translation>Cores mais quentes na tela reduzem a luz azul e o cansaço visual à noite</translation>
+    </message>
+    <message>
+        <source>Temperature</source>
+        <translation>Temperatura</translation>
+    </message>
+    <message>
+        <source>Cooler</source>
+        <translation>Mais fria</translation>
+    </message>
+    <message>
+        <source>Warmer</source>
+        <translation>Mais quente</translation>
+    </message>
+    <message>
+        <source>Schedule</source>
+        <translation>Agendamento</translation>
+    </message>
+    <message>
+        <source>Always</source>
+        <translation>Sempre</translation>
+    </message>
+    <message>
+        <source>Custom hours</source>
+        <translation>Horário</translation>
+    </message>
+    <message>
+        <source>From</source>
+        <translation>Das</translation>
+    </message>
+    <message>
+        <source>To</source>
+        <translation>às</translation>
+    </message>
 </context>
 <context>
     <name>NewNetworkDialog</name>
@@ -1348,6 +1463,10 @@
         <location filename="../src/qml/SideBar.qml" line="260"/>
         <source>System &amp; Update</source>
         <translation>Sistema e atualização</translation>
+    </message>
+    <message>
+        <source>Keyboard</source>
+        <translation>Teclado</translation>
     </message>
 </context>
 <context>

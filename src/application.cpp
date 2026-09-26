@@ -21,6 +21,8 @@
 #include "shortcuts.h"
 #include "autostart.h"
 #include "effects.h"
+#include "nightlight.h"
+#include "keyboardlayouts.h"
 #include "appearance.h"
 #include "background.h"
 #include "battery.h"
@@ -88,6 +90,8 @@ Application::Application(std::shared_ptr<QQmlApplicationEngine> engine)
     qmlRegisterType<Shortcuts>(uri, 1, 0, "Shortcuts");
     qmlRegisterType<Autostart>(uri, 1, 0, "Autostart");
     qmlRegisterType<Effects>(uri, 1, 0, "Effects");
+    qmlRegisterType<NightLight>(uri, 1, 0, "NightLight");
+    qmlRegisterType<KeyboardLayouts>(uri, 1, 0, "KeyboardLayouts");
     qmlRegisterSingletonType<Password>(uri, 1, 0, "Password", passwordSingleton);
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
