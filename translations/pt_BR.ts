@@ -401,6 +401,7 @@
     <message>
         <location line="-96"/>
         <location line="+100"/>
+        <location filename="../src/qml/Camera/Main.qml" line="+115"/>
         <location filename="../src/qml/Dock/Main.qml" line="+4"/>
         <source>Medium</source>
         <translation>Médio</translation>
@@ -1588,6 +1589,87 @@
         <source>A ring appears where you click, handy for recordings</source>
         <translation>Um anel aparece onde você clica, útil para gravações</translation>
     </message>
+    <message>
+        <location filename="../src/qml/Camera/Main.qml" line="-85"/>
+        <location line="+102"/>
+        <source>Camera</source>
+        <translation>Câmera</translation>
+    </message>
+    <message>
+        <location line="-55"/>
+        <source>Auto framing</source>
+        <translation>Enquadramento automático</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>The camera follows your face and keeps you centred during video calls, even when you move.</source>
+        <translation>A câmera segue o seu rosto e mantém você no centro durante as chamadas de vídeo, mesmo quando você se mexe.</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Zoom</source>
+        <translation>Zoom</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Wide</source>
+        <translation>Aberto</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Close</source>
+        <translation>Próximo</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Automatic</source>
+        <translation>Automática</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Preview</source>
+        <translation>Prévia</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Stop</source>
+        <translation>Parar</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Test camera</source>
+        <translation>Testar câmera</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>How to use</source>
+        <translation>Como usar</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>In Meet, Zoom, Teams, Discord or your browser, choose &quot;Lingmo Camera&quot; as the camera. The framing happens here, so it works in every app.</source>
+        <translation>No Meet, Zoom, Teams, Discord ou no navegador, escolha &quot;Lingmo Camera&quot; como câmera. O enquadramento é feito aqui, então funciona em qualquer app.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>The camera service is not running.</source>
+        <translation>O serviço da câmera não está em execução.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>The virtual camera is not ready yet. Restart the computer once after installing, or run: sudo modprobe v4l2loopback</source>
+        <translation>A câmera virtual ainda não está pronta. Reinicie o computador uma vez depois de instalar, ou execute: sudo modprobe v4l2loopback</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>In use now.</source>
+        <translation>Em uso agora.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ready. The camera light only turns on while an app is using it.</source>
+        <translation>Pronta. A luz da câmera só acende enquanto algum app estiver usando.</translation>
+    </message>
 </context>
 <context>
     <name>NewNetworkDialog</name>
@@ -1766,6 +1848,7 @@
         <location line="+16"/>
         <location line="+10"/>
         <location line="+10"/>
+        <location line="+9"/>
         <location line="+10"/>
         <location line="+10"/>
         <location line="+10"/>
@@ -1781,7 +1864,7 @@
         <translation>Sistema</translation>
     </message>
     <message>
-        <location line="-122"/>
+        <location line="-131"/>
         <source>Notifications</source>
         <translation>Notificações</translation>
     </message>
@@ -1792,6 +1875,11 @@
     </message>
     <message>
         <location line="+10"/>
+        <source>Camera</source>
+        <translation>Câmera</translation>
+    </message>
+    <message>
+        <location line="+9"/>
         <source>Mouse</source>
         <translation>Mouse</translation>
     </message>
@@ -1856,7 +1944,7 @@
         <translation>Inicialização</translation>
     </message>
     <message>
-        <location line="-117"/>
+        <location line="-126"/>
         <source>Effects</source>
         <translation>Efeitos</translation>
     </message>

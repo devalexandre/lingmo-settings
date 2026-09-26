@@ -153,6 +153,8 @@
         <file>qml/Autostart/Main.qml</file>
         <file>qml/Effects/Main.qml</file>
         <file>qml/Keyboard/Main.qml</file>
+        <file>qml/Camera/Main.qml</file>
+        <file>images/sidebar/all/camera.svg</file>
         <file>images/sidebar/all/sound.svg</file>
         <file>images/light/audio-volume-high-symbolic.svg</file>
         <file>images/light/audio-volume-low-symbolic.svg</file>

@@ -172,6 +172,15 @@ Item {
         }
 
         ListElement {
+            title: qsTr("Camera")
+            name: "camera"
+            page: "qrc:/qml/Camera/Main.qml"
+            iconSource: "camera.svg"
+            iconColor: "#30B0C7"
+            category: qsTr("System")
+        }
+
+        ListElement {
             title: qsTr("Mouse")
             name: "mouse"
             page: "qrc:/qml/Cursor/Main.qml"
