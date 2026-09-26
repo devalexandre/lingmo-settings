@@ -18,7 +18,7 @@ endif()
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake;${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 # set(QT Core Gui Widgets Network WebEngine Quick QuickControls2 X11Extras DBus Xml Concurrent LinguistTools)
-set(QT Core Gui Widgets Network Quick QuickControls2 DBus Xml Concurrent LinguistTools)
+set(QT Core Gui GuiPrivate Widgets Network Quick QuickControls2 DBus Xml Concurrent LinguistTools)
 find_package(Qt6 REQUIRED ${QT})
 find_package(X11 REQUIRED)
 find_package(Freetype REQUIRED)
@@ -32,7 +32,7 @@ find_package(KF6Config)
 find_package(LingmoLogger REQUIRED)
 
 pkg_search_module(FontConfig REQUIRED fontconfig IMPORTED_TARGET)
-pkg_search_module(ICU REQUIRED icu-i18n)
+pkg_check_modules(ICU REQUIRED icu-i18n icu-uc)
 
 include_directories(${ICU_INCLUDE_DIRS})
 
@@ -89,7 +89,7 @@ foreach(filepath ${TS_FILES})
     string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/" "" filename ${filepath})
     list(APPEND ts_files_replaced ${filename})
 endforeach()
-qt6_create_translation(QM_FILES ${CMAKE_CURRENT_SOURCE_DIR} ${ts_files_replaced})
+qt_add_translation(QM_FILES ${ts_files_replaced})
 
 add_custom_target(translations ALL DEPENDS ${QM_FILES} SOURCES ${TS_FILES})
 

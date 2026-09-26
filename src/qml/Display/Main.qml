@@ -270,6 +270,36 @@ ItemPage {
                                         screen.save()
                                     }
                                 }
+
+                                // The status bar and the dock live on the primary screen
+                                Label {
+                                    text: qsTr("Primary display")
+                                    visible: primaryBox.visible
+                                }
+
+                                RowLayout {
+                                    visible: _screenView.count > 1
+                                    spacing: LingmoUI.Units.largeSpacing
+
+                                    Switch {
+                                        id: primaryBox
+                                        checked: element.primary
+                                        // There's always one primary screen: pick another one to move it
+                                        enabled: !element.primary && element.enabled
+                                        onToggled: {
+                                            element.primary = true
+                                            screen.save()
+                                        }
+                                    }
+
+                                    Label {
+                                        Layout.fillWidth: true
+                                        text: element.primary ? qsTr("Status bar and dock are shown here")
+                                                              : qsTr("Show the status bar and dock on this display")
+                                        color: LingmoUI.Theme.disabledTextColor
+                                        wrapMode: Text.WordWrap
+                                    }
+                                }
                             }
                         }
                     }

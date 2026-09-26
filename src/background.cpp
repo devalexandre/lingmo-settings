@@ -10,7 +10,11 @@ static QVariantList getBackgroundPaths()
         list.append(bg);
     }
     std::sort(list.begin(), list.end());
-    return QVariantList{list};
+    // One entry per file: QVariantList{list} would be a single QStringList entry in Qt 6
+    QVariantList paths;
+    for (const QString &path : list)
+        paths.append(path);
+    return paths;
 }
 
 Background::Background(QObject *parent)

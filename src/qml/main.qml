@@ -39,7 +39,8 @@ LingmoUI.Window {
 
     property alias stackView: _stackView
 
-    background.opacity: LingmoUI.Theme.darkMode ? 0.7 : 0.5
+    // Nearly opaque: a see-through window turns grey over a dark wallpaper in the light theme
+    background.opacity: LingmoUI.Theme.darkMode ? 0.88 : 0.97
     header.height: 40
     contentTopMargin: 0
 

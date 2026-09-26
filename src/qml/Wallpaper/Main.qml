@@ -3,7 +3,8 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import Qt5Compat.GraphicalEffects
 
-import QtQuick.Dialogs 1.2
+import QtQuick.Dialogs
+import QtCore
 import Lingmo.Settings 1.0
 import LingmoUI.CompatibleModule 3.0 as LingmoUI
 
@@ -28,20 +29,16 @@ ItemPage {
 
             FileDialog {
                 id: fileDialog
-                folder: shortcuts.pictures
-                nameFilters: ["Image files (*.jpg *.png)", "All files (*)"]
-                selectFolder: fales
-                onAccepted: {
-                    _image.sources = fileDialog.fileUrl
-                    fileDialog.baseData = fileDialog.fileUrl
-                    background.setBackground(baseData)
-                }
+                currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+                nameFilters: ["Image files (*.jpg *.jpeg *.png)", "All files (*)"]
+                onAccepted: background.setBackground(decodeURIComponent(selectedFile.toString().replace("file://", "")))
             }
 
             DesktopPreview {
                Layout.alignment: Qt.AlignHCenter
-               width: 500
-               height: 300
+               // Qt 6 layouts size children from Layout.* hints, not width/height
+               Layout.preferredWidth: 500
+               Layout.preferredHeight: 300
             }
 
             RoundedItem {
@@ -81,7 +78,8 @@ ItemPage {
                 GridView {
                     id: _view
 
-                    property int rowCount: _view.width / itemWidth
+                    // At least one row, or the height below is NaN before the first layout pass
+                    property int rowCount: Math.max(1, Math.floor(_view.width / itemWidth))
 
                     Layout.fillWidth: true
                     implicitHeight: Math.ceil(_view.count / rowCount) * cellHeight + LingmoUI.Units.largeSpacing
@@ -218,7 +216,7 @@ ItemPage {
 
                 Loader {
                     Layout.fillWidth: true
-                    height: item.height
+                    height: item ? item.height : 0
                     visible: background.backgroundType === 1
                     sourceComponent: colorView
                 }

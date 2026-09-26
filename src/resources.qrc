@@ -84,6 +84,7 @@
         <file>images/sidebar/all/accounts.svg</file>
         <file>images/sidebar/all/appearance.svg</file>
         <file>images/sidebar/all/accessibility.svg</file>
+        <file>images/sidebar/all/keyboard.svg</file>
         <file>images/sidebar/all/battery.svg</file>
         <file>images/sidebar/all/bluetooth.svg</file>
         <file>images/sidebar/all/display.svg</file>
@@ -145,6 +146,7 @@
         <file>images/sidebar/all/proxy.svg</file>
         <file>qml/Sound/Main.qml</file>
         <file>qml/Accessibility/Main.qml</file>
+        <file>qml/Shortcuts/Main.qml</file>
         <file>images/sidebar/all/sound.svg</file>
         <file>images/light/audio-volume-high-symbolic.svg</file>
         <file>images/light/audio-volume-low-symbolic.svg</file>

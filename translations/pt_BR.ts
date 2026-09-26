@@ -520,6 +520,21 @@
         <translation>Habilitado</translation>
     </message>
     <message>
+        <location filename="../src/qml/Display/Main.qml" line="276"/>
+        <source>Primary display</source>
+        <translation>Tela principal</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/Display/Main.qml" line="300"/>
+        <source>Status bar and dock are shown here</source>
+        <translation>A barra de status e a dock ficam nesta tela</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/Display/Main.qml" line="301"/>
+        <source>Show the status bar and dock on this display</source>
+        <translation>Mostrar a barra de status e a dock nesta tela</translation>
+    </message>
+    <message>
         <location filename="../src/qml/Display/Main.qml" line="291"/>
         <source>Scale</source>
         <translation>Escala</translation>
@@ -1575,6 +1590,91 @@
         <location filename="../src/qml/main.qml" line="32"/>
         <source>Settings</source>
         <translation>Configurações</translation>
+    </message>
+</context>
+<context>
+    <name>SideBar</name>
+    <message>
+        <source>Shortcuts</source>
+        <translation>Atalhos</translation>
+    </message>
+</context>
+<context>
+    <name>Main</name>
+    <message>
+        <source>Shortcuts</source>
+        <translation>Atalhos</translation>
+    </message>
+    <message>
+        <source>Keyboard shortcuts</source>
+        <translation>Atalhos de teclado</translation>
+    </message>
+    <message>
+        <source>Add shortcut</source>
+        <translation>Adicionar atalho</translation>
+    </message>
+    <message>
+        <source>No shortcuts yet</source>
+        <translation>Nenhum atalho ainda</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Editar</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Remover</translation>
+    </message>
+    <message>
+        <source>Changes apply immediately. Press Super alone to set a shortcut for tapping the Super key.</source>
+        <translation>As alterações valem na hora. Aperte só a tecla Super para criar um atalho ao tocar nela.</translation>
+    </message>
+    <message>
+        <source>Edit shortcut</source>
+        <translation>Editar atalho</translation>
+    </message>
+    <message>
+        <source>New shortcut</source>
+        <translation>Novo atalho</translation>
+    </message>
+    <message>
+        <source>Press the keys… (Esc to cancel)</source>
+        <translation>Pressione as teclas… (Esc para cancelar)</translation>
+    </message>
+    <message>
+        <source>Click to set the keys</source>
+        <translation>Clique para definir as teclas</translation>
+    </message>
+    <message>
+        <source>Name (e.g. Screenshot)</source>
+        <translation>Nome (ex.: Captura de tela)</translation>
+    </message>
+    <message>
+        <source>Command (e.g. flameshot gui)</source>
+        <translation>Comando (ex.: flameshot gui)</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Salvar</translation>
+    </message>
+</context>
+<context>
+    <name>Shortcuts</name>
+    <message>
+        <source>Press the keys for the shortcut</source>
+        <translation>Pressione as teclas do atalho</translation>
+    </message>
+    <message>
+        <source>Enter the command to run</source>
+        <translation>Informe o comando a executar</translation>
+    </message>
+    <message>
+        <source>%1 is already used by &quot;%2&quot;</source>
+        <translation>%1 já está em uso por &quot;%2&quot;</translation>
     </message>
 </context>
 </TS>

@@ -38,9 +38,8 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        color: LingmoUI.Theme.darkMode ? Qt.lighter(LingmoUI.Theme.backgroundColor, 1.5)
-                                     : Qt.darker(LingmoUI.Theme.backgroundColor, 1.05)
-        opacity: rootWindow.compositing ? 0.3 : 0.4
+        // Own tone per theme: a cool light grey (light) or a deeper Dracula-like panel (dark)
+        color: LingmoUI.Theme.darkMode ? Qt.rgba(0.11, 0.11, 0.15, 0.55) : "#EDEEF2"
 
         Behavior on color {
             ColorAnimation {
@@ -59,7 +58,7 @@ Item {
             page: "qrc:/qml/WLAN/Main.qml"
             // source: "wlan.svg"
             iconSource: "wlan.svg"
-            iconColor: "#2277FF"
+            iconColor: "#0A84FF"
             category: qsTr("Network and connection")
         }
 
@@ -69,7 +68,7 @@ Item {
             page: "qrc:/qml/Wired/Main.qml"
             // source: "network.svg"
             iconSource: "network.svg"
-            iconColor: "#2277FF"
+            iconColor: "#32ADE6"
             category: qsTr("Network and connection")
         }
 
@@ -79,7 +78,7 @@ Item {
             page: "qrc:/qml/Bluetooth/Main.qml"
             // source: "bluetooth.svg"
             iconSource: "bluetooth.svg"
-            iconColor: "#2277FF"
+            iconColor: "#1E6FF0"
             category: qsTr("Network and connection")
         }
 
@@ -89,7 +88,7 @@ Item {
             page: "qrc:/qml/Proxy/Main.qml"
             // source: "proxy.svg"
             iconSource: "proxy.svg"
-            iconColor: "#2277FF"
+            iconColor: "#8E8E93"
             category: qsTr("Network and connection")
         }
 
@@ -99,7 +98,7 @@ Item {
             page: "qrc:/qml/Display/Main.qml"
             // source: "display.svg"
             iconSource: "display.svg"
-            iconColor: "#2277FF"
+            iconColor: "#30B0C7"
             category: qsTr("Display and appearance")
         }
 
@@ -109,7 +108,7 @@ Item {
             page: "qrc:/qml/Appearance/Main.qml"
             // source: "appearance.svg"
             iconSource: "appearance.svg"
-            iconColor: "#2277FF"
+            iconColor: "#5E5CE6"
             category: qsTr("Display and appearance")
         }
 
@@ -119,7 +118,7 @@ Item {
             page: "qrc:/qml/Wallpaper/Main.qml"
             // source: "wallpaper.svg"
             iconSource: "wallpaper.svg"
-            iconColor: "#2277FF"
+            iconColor: "#64B5F6"
             category: qsTr("Display and appearance")
         }
 
@@ -129,7 +128,7 @@ Item {
             page: "qrc:/qml/Dock/Main.qml"
             // source: "dock.svg"
             iconSource: "dock.svg"
-            iconColor: "#2277FF"
+            iconColor: "#48484A"
             category: qsTr("Display and appearance")
         }
 
@@ -139,7 +138,7 @@ Item {
             page: "qrc:/qml/User/Main.qml"
             // source: "accounts.svg"
             iconSource: "accounts.svg"
-            iconColor: "#2277FF"
+            iconColor: "#FF9500"
             category: qsTr("System")
         }
 
@@ -149,7 +148,7 @@ Item {
             page: "qrc:/qml/Notification/Main.qml"
             // source: "notifications.svg"
             iconSource: "notifications.svg"
-            iconColor: "#2277FF"
+            iconColor: "#FF3B30"
             category: qsTr("System")
         }
 
@@ -159,7 +158,7 @@ Item {
             page: "qrc:/qml/Sound/Main.qml"
             // source: "sound.svg"
             iconSource: "sound.svg"
-            iconColor: "#2277FF"
+            iconColor: "#FF2D55"
             category: qsTr("System")
         }
 
@@ -169,7 +168,7 @@ Item {
             page: "qrc:/qml/Cursor/Main.qml"
             // source: "cursor.svg"
             iconSource: "cursor.svg"
-            iconColor: "#2277FF"
+            iconColor: "#8E8E93"
             category: qsTr("System")
         }
 
@@ -179,7 +178,7 @@ Item {
             page: "qrc:/qml/Touchpad/Main.qml"
             // source: "touchpad.svg"
             iconSource: "touchpad.svg"
-            // iconColor: "#2277FF"
+            iconColor: "#8E8E93"
             category: qsTr("System")
         }
 
@@ -189,7 +188,7 @@ Item {
             page: "qrc:/qml/DateTime/Main.qml"
             // source: "datetime.svg"
             iconSource: "datetime.svg"
-            iconColor: "#2277FF"
+            iconColor: "#FF9F0A"
             category: qsTr("System")
         }
 
@@ -199,7 +198,16 @@ Item {
             page: "qrc:/qml/Accessibility/Main.qml"
             //source: "accessibility.svg"
             iconSource: "accessibility.svg"
-            iconColor: "#2277FF"
+            iconColor: "#007AFF"
+            category: qsTr("System")
+        }
+
+        ListElement {
+            title: qsTr("Shortcuts")
+            name: "shortcuts"
+            page: "qrc:/qml/Shortcuts/Main.qml"
+            iconSource: "keyboard.svg"
+            iconColor: "#5856D6"
             category: qsTr("System")
         }
         
@@ -209,7 +217,7 @@ Item {
             page: "qrc:/qml/DefaultApp/Main.qml"
             //source: "defaultapps.svg"
             iconSource: "defaultapps.svg"
-            iconColor: "#2277FF"
+            iconColor: "#AF52DE"
             category: qsTr("System")
         }
 
@@ -219,7 +227,7 @@ Item {
             page: "qrc:/qml/LanguagePage.qml"
             // source: "language.svg"
             iconSource: "language.svg"
-            iconColor: "#2277FF"
+            iconColor: "#0FB5AE"
             category: qsTr("System")
         }
 
@@ -228,7 +236,7 @@ Item {
             name: "battery"
             page: "qrc:/qml/Battery/Main.qml"
             // source: "battery.svg"
-            iconColor: "#2277FF"
+            iconColor: "#34C759"
             iconSource: "battery.svg"
             category: qsTr("System")
         }
@@ -237,7 +245,7 @@ Item {
             title: qsTr("Power")
             name: "power"
             page: "qrc:/qml/Power/Main.qml"
-            iconColor: "#2277FF"
+            iconColor: "#30D158"
             iconSource: "power.svg"
             category: qsTr("System")
         }
@@ -256,7 +264,7 @@ Item {
             name: "about"
             page: "qrc:/qml/About/Main.qml"
             iconSource: "info.svg"
-            iconColor: "#2277FF"
+            iconColor: "#8E8E93"
             category: qsTr("System & Update")
         }
 
@@ -267,15 +275,20 @@ Item {
         anchors.margins: 0
         spacing: 0
 
+        // The window's traffic-light buttons sit in this strip, like macOS
+        Item {
+            Layout.preferredHeight: rootWindow.header.height
+        }
+
         Label {
             text: rootWindow.title
             color: rootWindow.active ? LingmoUI.Theme.textColor : LingmoUI.Theme.disabledTextColor
-            Layout.preferredHeight: rootWindow.header.height
             leftPadding: LingmoUI.Units.largeSpacing + LingmoUI.Units.smallSpacing
             rightPadding: LingmoUI.Units.largeSpacing + LingmoUI.Units.smallSpacing
-            topPadding: LingmoUI.Units.smallSpacing
-            bottomPadding: 0
-            font.pointSize: 13
+            topPadding: 2
+            bottomPadding: LingmoUI.Units.smallSpacing * 1.5
+            font.pointSize: 17
+            font.bold: true
         }
 
         ListView {
@@ -394,20 +407,26 @@ Item {
                     //     Layout.alignment: Qt.AlignVCenter
                     // }
 
+                    // macOS-style tile: a rounded square in the item's own colour
                     Rectangle {
                         id: iconRect
-                        width: 24
-                        height: 24
+                        Layout.preferredWidth: 26
+                        Layout.preferredHeight: 26
                         Layout.alignment: Qt.AlignVCenter
-                        radius: 20
-                        color: LingmoUI.Theme.highlightColor
-                        // color: model.iconColor
-                        // color: "transparent"
-
-                        // gradient: Gradient {
-                        //     GradientStop { position: 0.0; color: Qt.lighter(model.iconColor, 1.15) }
-                        //     GradientStop { position: 1.0; color: model.iconColor }
-                        // }
+                        radius: 7
+                        // Same hue in both themes, tuned per theme: deeper on light
+                        // backgrounds so the tile doesn't wash out, brighter on dark ones
+                        readonly property color tileColor: {
+                            var c = model.iconColor || LingmoUI.Theme.highlightColor
+                            return LingmoUI.Theme.darkMode ? Qt.lighter(c, 1.12) : Qt.darker(c, 1.04)
+                        }
+                        gradient: Gradient {
+                            GradientStop { position: 0.0; color: Qt.lighter(iconRect.tileColor, LingmoUI.Theme.darkMode ? 1.18 : 1.12) }
+                            GradientStop { position: 1.0; color: iconRect.tileColor }
+                        }
+                        border.width: 1
+                        border.color: LingmoUI.Theme.darkMode ? Qt.rgba(1, 1, 1, isCurrent ? 0.55 : 0.18)
+                                                              : Qt.rgba(0, 0, 0, isCurrent ? 0.0 : 0.10)
 
                         Image {
                             id: icon
@@ -415,10 +434,9 @@ Item {
                             width: 16
                             height: width
                             source: "qrc:/images/sidebar/all/" + model.iconSource
-                            sourceSize: Qt.size(width, height)
-                            Layout.alignment: Qt.AlignVCenter
-                            antialiasing: false
-                            smooth: false
+                            sourceSize: Qt.size(width * 2, height * 2)
+                            smooth: true
+                            antialiasing: true
                         }
                     }
 
