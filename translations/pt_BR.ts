@@ -1657,8 +1657,8 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>The virtual camera is not ready yet. Restart the computer once after installing, or run: sudo modprobe v4l2loopback</source>
-        <translation>A câmera virtual ainda não está pronta. Reinicie o computador uma vez depois de instalar, ou execute: sudo modprobe v4l2loopback</translation>
+        <source>The virtual camera is not ready yet. Restart the computer once after installing, or run: sudo modprobe -r v4l2loopback &amp;&amp; sudo modprobe v4l2loopback</source>
+        <translation>A câmera virtual ainda não está pronta. Reinicie o computador uma vez depois de instalar, ou execute: sudo modprobe -r v4l2loopback &amp;&amp; sudo modprobe v4l2loopback</translation>
     </message>
     <message>
         <location line="+1"/>

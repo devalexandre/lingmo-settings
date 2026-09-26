@@ -201,7 +201,7 @@ ItemPage {
                     wrapMode: Text.WordWrap
                     color: LingmoUI.Theme.disabledTextColor
                     text: !camera.running ? qsTr("The camera service is not running.")
-                        : !camera.available ? qsTr("The virtual camera is not ready yet. Restart the computer once after installing, or run: sudo modprobe v4l2loopback")
+                        : !camera.available ? qsTr("The virtual camera is not ready yet. Restart the computer once after installing, or run: sudo modprobe -r v4l2loopback && sudo modprobe v4l2loopback")
                         : camera.active ? qsTr("In use now.")
                         : qsTr("Ready. The camera light only turns on while an app is using it.")
                 }
