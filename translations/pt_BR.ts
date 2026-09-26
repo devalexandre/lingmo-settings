@@ -1704,4 +1704,65 @@
         <translation>Nenhuma imagem ainda. Adicione imagens ou copie-as para a pasta acima.</translation>
     </message>
 </context>
+<context>
+    <name>SideBar</name>
+    <message>
+        <source>Startup</source>
+        <translation>Inicialização</translation>
+    </message>
+</context>
+<context>
+    <name>Main</name>
+    <message>
+        <source>Startup</source>
+        <translation>Inicialização</translation>
+    </message>
+    <message>
+        <source>Apps opened at login</source>
+        <translation>Apps abertos no login</translation>
+    </message>
+    <message>
+        <source>Add command</source>
+        <translation>Adicionar comando</translation>
+    </message>
+    <message>
+        <source>Add app</source>
+        <translation>Adicionar app</translation>
+    </message>
+    <message>
+        <source>No apps open at login</source>
+        <translation>Nenhum app abre no login</translation>
+    </message>
+    <message>
+        <source>Changes apply at the next login.</source>
+        <translation>As alterações valem no próximo login.</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Buscar</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>Adicionar</translation>
+    </message>
+    <message>
+        <source>Name (e.g. Sync notes)</source>
+        <translation>Nome (ex.: Sincronizar notas)</translation>
+    </message>
+    <message>
+        <source>Command (e.g. ~/bin/sync.sh)</source>
+        <translation>Comando (ex.: ~/bin/sync.sh)</translation>
+    </message>
+</context>
+<context>
+    <name>Autostart</name>
+    <message>
+        <source>Enter the command to run</source>
+        <translation>Informe o comando a executar</translation>
+    </message>
+    <message>
+        <source>Could not create the entry</source>
+        <translation>Não foi possível criar a entrada</translation>
+    </message>
+</context>
 </TS>

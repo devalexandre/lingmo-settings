@@ -19,6 +19,7 @@
 #include "about.h"
 #include "accessibility.h"
 #include "shortcuts.h"
+#include "autostart.h"
 #include "appearance.h"
 #include "background.h"
 #include "battery.h"
@@ -84,6 +85,7 @@ Application::Application(std::shared_ptr<QQmlApplicationEngine> engine)
     qmlRegisterType<DefaultApplications>(uri, 1, 0, "DefaultApplications");
     qmlRegisterType<Accessibility>(uri, 1, 0, "Accessibility");
     qmlRegisterType<Shortcuts>(uri, 1, 0, "Shortcuts");
+    qmlRegisterType<Autostart>(uri, 1, 0, "Autostart");
     qmlRegisterSingletonType<Password>(uri, 1, 0, "Password", passwordSingleton);
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)

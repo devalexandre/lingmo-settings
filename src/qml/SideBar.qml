@@ -210,6 +210,15 @@ Item {
             iconColor: "#5856D6"
             category: qsTr("System")
         }
+
+        ListElement {
+            title: qsTr("Startup")
+            name: "startup"
+            page: "qrc:/qml/Autostart/Main.qml"
+            iconSource: "startup.svg"
+            iconColor: "#FF9F0A"
+            category: qsTr("System")
+        }
         
         ListElement {
             title: qsTr("Default Applications")
