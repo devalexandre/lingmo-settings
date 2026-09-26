@@ -70,13 +70,13 @@ Item {
                         
                         Label {
                             visible: !control.check
-                            text: "System Update"
+                            text: qsTr("System Update")
                             Layout.fillWidth: true
                         }
 
                         Label {
                             visible: !control.checked
-                            text: "Checking... " + updator.checkProgress + "%"
+                            text: qsTr("Checking... %1%").arg(updator.checkProgress)
                             Layout.fillWidth: true
                         }
 
@@ -139,7 +139,7 @@ Item {
                     //     anchors.left: parent.right;
                     //     anchors.leftMargin: 10
                     //     anchors.verticalCenter: parent.verticalCenter;
-                    //     text: "Checking... " + updator.checkProgress + "%"
+                    //     text: qsTr("Checking... %1%").arg(updator.checkProgress)
                     //     color: LingmoUI.Theme.highlightedTextColor
                     //     font: control.font
                     // }
