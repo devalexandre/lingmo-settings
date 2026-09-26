@@ -38,6 +38,13 @@ class CameraSettings : public QObject
     Q_PROPERTY(QString zoom READ zoom WRITE setZoom NOTIFY changed)
     // Device of the real camera, "" for automatic
     Q_PROPERTY(QString source READ source WRITE setSource NOTIFY changed)
+    // Blur what is behind the people
+    Q_PROPERTY(bool backgroundBlur READ backgroundBlur WRITE setBackgroundBlur NOTIFY changed)
+    // "light" or "strong"
+    Q_PROPERTY(QString blurStrength READ blurStrength WRITE setBlurStrength NOTIFY changed)
+    // Image shown behind the people instead of the blur, "" for none. Takes a path or a
+    // file:// URL (from a FileDialog)
+    Q_PROPERTY(QString backgroundImage READ backgroundImage WRITE setBackgroundImage NOTIFY changed)
     // [{ device, name }]
     Q_PROPERTY(QVariantList cameras READ cameras NOTIFY changed)
 
@@ -51,10 +58,16 @@ public:
     QString zoom() const { return m_zoom; }
     QString source() const { return m_source; }
     QVariantList cameras() const { return m_cameras; }
+    bool backgroundBlur() const { return m_backgroundBlur; }
+    QString blurStrength() const { return m_blurStrength; }
+    QString backgroundImage() const { return m_backgroundImage; }
 
     void setFraming(bool on);
     void setZoom(const QString &zoom);
     void setSource(const QString &device);
+    void setBackgroundBlur(bool on);
+    void setBlurStrength(const QString &strength);
+    void setBackgroundImage(const QString &path);
 
     // Starts lingmo-camera if it isn't running
     Q_INVOKABLE void start();
@@ -74,6 +87,9 @@ private:
     bool m_framing = true;
     QString m_zoom = "medium";
     QString m_source;
+    bool m_backgroundBlur = false;
+    QString m_blurStrength = "strong";
+    QString m_backgroundImage;
     QVariantList m_cameras;
 };
 

@@ -401,7 +401,7 @@
     <message>
         <location line="-96"/>
         <location line="+100"/>
-        <location filename="../src/qml/Camera/Main.qml" line="+115"/>
+        <location filename="../src/qml/Camera/Main.qml" line="+125"/>
         <location filename="../src/qml/Dock/Main.qml" line="+4"/>
         <source>Medium</source>
         <translation>Médio</translation>
@@ -531,7 +531,7 @@
         <translation>Principal</translation>
     </message>
     <message>
-        <location line="+48"/>
+        <location line="+51"/>
         <source>Drag the monitors to match how they sit on your desk</source>
         <translation>Arraste os monitores para ficarem como estão na sua mesa</translation>
     </message>
@@ -1194,7 +1194,7 @@
         <translation>Pesquisar (ex.: Português, us)</translation>
     </message>
     <message>
-        <location filename="../src/qml/Display/Main.qml" line="-521"/>
+        <location filename="../src/qml/Display/Main.qml" line="-524"/>
         <source>Night Light</source>
         <translation>Luz noturna</translation>
     </message>
@@ -1270,6 +1270,7 @@
     </message>
     <message>
         <location filename="../src/qml/Autostart/Main.qml" line="-165"/>
+        <location filename="../src/qml/Camera/Main.qml" line="+117"/>
         <location filename="../src/qml/Keyboard/Main.qml" line="-77"/>
         <location filename="../src/qml/Shortcuts/Main.qml" line="+7"/>
         <source>Remove</source>
@@ -1317,17 +1318,19 @@
         <translation>Adicionar imagens</translation>
     </message>
     <message>
-        <location line="-89"/>
+        <location filename="../src/qml/Camera/Main.qml" line="-195"/>
+        <location filename="../src/qml/Wallpaper/Main.qml" line="-89"/>
         <source>Images</source>
         <translation>Imagens</translation>
     </message>
     <message>
         <location line="+0"/>
+        <location filename="../src/qml/Wallpaper/Main.qml" line="+0"/>
         <source>All files</source>
         <translation>Todos os arquivos</translation>
     </message>
     <message>
-        <location line="+71"/>
+        <location filename="../src/qml/Wallpaper/Main.qml" line="+71"/>
         <source>Folder</source>
         <translation>Pasta</translation>
     </message>
@@ -1605,13 +1608,18 @@
         <translation>Um anel aparece onde você clica, útil para gravações</translation>
     </message>
     <message>
-        <location filename="../src/qml/Camera/Main.qml" line="-85"/>
-        <location line="+102"/>
+        <location filename="../src/qml/Camera/Main.qml" line="-15"/>
+        <location line="+110"/>
         <source>Camera</source>
         <translation>Câmera</translation>
     </message>
     <message>
-        <location line="-55"/>
+        <location line="-97"/>
+        <source>Choose a background image</source>
+        <translation>Escolher uma imagem de fundo</translation>
+    </message>
+    <message>
+        <location line="+42"/>
         <source>Auto framing</source>
         <translation>Enquadramento automático</translation>
     </message>
@@ -1641,7 +1649,49 @@
         <translation>Automática</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+23"/>
+        <source>Blur background</source>
+        <translation>Desfocar fundo</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>You stay sharp and the room behind you is blurred, in every app.</source>
+        <translation>Você fica nítido e o ambiente atrás de você fica desfocado, em qualquer app.</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Strength</source>
+        <translation>Intensidade</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Light</source>
+        <comment>blur strength</comment>
+        <translation>Leve</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Strong</source>
+        <comment>blur strength</comment>
+        <translation>Forte</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Background image</source>
+        <translation>Imagem de fundo</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Optional: shown behind you instead of the blur.</source>
+        <translation>Opcional: aparece atrás de você no lugar do desfoque.</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Choose…</source>
+        <translation>Escolher…</translation>
+    </message>
+    <message>
+        <location line="+11"/>
         <source>Preview</source>
         <translation>Prévia</translation>
     </message>

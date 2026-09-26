@@ -25,6 +25,7 @@
 #include <QDBusReply>
 #include <QDBusServiceWatcher>
 #include <QProcess>
+#include <QUrl>
 
 namespace {
 const QString Service = "com.lingmo.Camera";
@@ -55,6 +56,9 @@ void CameraSettings::reload()
         m_framing = iface.property("Framing").toBool();
         m_zoom = iface.property("Zoom").toString();
         m_source = iface.property("Source").toString();
+        m_backgroundBlur = iface.property("BackgroundBlur").toBool();
+        m_blurStrength = iface.property("BlurStrength").toString();
+        m_backgroundImage = iface.property("BackgroundImage").toString();
 
         m_cameras.clear();
         const QDBusReply<QStringList> reply = iface.call("Cameras");
@@ -88,6 +92,21 @@ void CameraSettings::setZoom(const QString &zoom)
 void CameraSettings::setSource(const QString &device)
 {
     set("Source", device);
+}
+
+void CameraSettings::setBackgroundBlur(bool on)
+{
+    set("BackgroundBlur", on);
+}
+
+void CameraSettings::setBlurStrength(const QString &strength)
+{
+    set("BlurStrength", strength);
+}
+
+void CameraSettings::setBackgroundImage(const QString &path)
+{
+    set("BackgroundImage", path.startsWith("file:") ? QUrl(path).toLocalFile() : path);
 }
 
 void CameraSettings::start()

@@ -21,6 +21,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtMultimedia
+import QtQuick.Dialogs
+import QtCore
 import LingmoUI.CompatibleModule 3.0 as LingmoUI
 
 import Lingmo.Settings 1.0
@@ -36,6 +38,14 @@ ItemPage {
 
     MediaDevices {
         id: mediaDevices
+    }
+
+    FileDialog {
+        id: imageDialog
+        title: qsTr("Choose a background image")
+        currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+        nameFilters: [qsTr("Images") + " (*.jpg *.jpeg *.png *.webp)", qsTr("All files") + " (*)"]
+        onAccepted: camera.backgroundImage = selectedFile.toString()
     }
 
     // Preview of what the apps get: this page reads "Lingmo Camera" like any app would
@@ -145,6 +155,98 @@ ItemPage {
                             return 0
                         }
                         onActivated: camera.source = currentValue
+                    }
+                }
+            }
+
+            RoundedItem {
+                RowLayout {
+                    spacing: LingmoUI.Units.largeSpacing * 2
+                    Layout.fillWidth: true
+
+                    ColumnLayout {
+                        spacing: 0
+                        Layout.fillWidth: true
+
+                        Label {
+                            text: qsTr("Blur background")
+                        }
+
+                        Label {
+                            text: qsTr("You stay sharp and the room behind you is blurred, in every app.")
+                            color: LingmoUI.Theme.disabledTextColor
+                            wrapMode: Text.WordWrap
+                            Layout.fillWidth: true
+                        }
+                    }
+
+                    Switch {
+                        checked: camera.backgroundBlur
+                        enabled: camera.running
+                        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+                        rightPadding: 0
+                        onToggled: camera.backgroundBlur = checked
+                    }
+                }
+
+                RowLayout {
+                    spacing: LingmoUI.Units.largeSpacing * 2
+                    Layout.fillWidth: true
+                    enabled: camera.running && camera.backgroundBlur && camera.backgroundImage === ""
+
+                    Label {
+                        text: qsTr("Strength")
+                    }
+
+                    TabBar {
+                        Layout.fillWidth: true
+                        currentIndex: camera.blurStrength === "light" ? 0 : 1
+
+                        TabButton {
+                            text: qsTr("Light", "blur strength")
+                            onClicked: camera.blurStrength = "light"
+                        }
+                        TabButton {
+                            text: qsTr("Strong", "blur strength")
+                            onClicked: camera.blurStrength = "strong"
+                        }
+                    }
+                }
+
+                RowLayout {
+                    spacing: LingmoUI.Units.largeSpacing * 2
+                    Layout.fillWidth: true
+                    enabled: camera.running && camera.backgroundBlur
+
+                    ColumnLayout {
+                        spacing: 0
+                        Layout.fillWidth: true
+
+                        Label {
+                            text: qsTr("Background image")
+                        }
+
+                        Label {
+                            text: camera.backgroundImage !== ""
+                                  ? camera.backgroundImage.substring(camera.backgroundImage.lastIndexOf("/") + 1)
+                                  : qsTr("Optional: shown behind you instead of the blur.")
+                            color: LingmoUI.Theme.disabledTextColor
+                            elide: Text.ElideMiddle
+                            Layout.fillWidth: true
+                        }
+                    }
+
+                    Button {
+                        flat: true
+                        visible: camera.backgroundImage !== ""
+                        text: qsTr("Remove")
+                        onClicked: camera.backgroundImage = ""
+                    }
+
+                    Button {
+                        flat: true
+                        text: qsTr("Choose…")
+                        onClicked: imageDialog.open()
                     }
                 }
             }
