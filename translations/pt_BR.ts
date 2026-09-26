@@ -521,7 +521,17 @@
         <translation>Tela</translation>
     </message>
     <message>
-        <location line="+40"/>
+        <location line="+86"/>
+        <source>Off</source>
+        <translation>Desligada</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Primary</source>
+        <translation>Principal</translation>
+    </message>
+    <message>
+        <location line="+50"/>
         <source>Screen Name</source>
         <translation>Nome da tela</translation>
     </message>
@@ -561,7 +571,7 @@
         <translation>Mostrar a barra de status e a dock nesta tela</translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+24"/>
         <location filename="../src/qml/Effects/Main.qml" line="-9"/>
         <source>Scale</source>
         <translation>Escala</translation>
@@ -1179,7 +1189,7 @@
         <translation>Pesquisar (ex.: Português, us)</translation>
     </message>
     <message>
-        <location filename="../src/qml/Display/Main.qml" line="-342"/>
+        <location filename="../src/qml/Display/Main.qml" line="-439"/>
         <source>Night Light</source>
         <translation>Luz noturna</translation>
     </message>
