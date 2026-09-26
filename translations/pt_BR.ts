@@ -1677,4 +1677,31 @@
         <translation>%1 já está em uso por &quot;%2&quot;</translation>
     </message>
 </context>
+<context>
+    <name>Main</name>
+    <message>
+        <source>Add images</source>
+        <translation>Adicionar imagens</translation>
+    </message>
+    <message>
+        <source>Images</source>
+        <translation>Imagens</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation>Todos os arquivos</translation>
+    </message>
+    <message>
+        <source>Folder</source>
+        <translation>Pasta</translation>
+    </message>
+    <message>
+        <source>Open folder</source>
+        <translation>Abrir pasta</translation>
+    </message>
+    <message>
+        <source>No images yet. Add images, or copy them into the folder above.</source>
+        <translation>Nenhuma imagem ainda. Adicione imagens ou copie-as para a pasta acima.</translation>
+    </message>
+</context>
 </TS>
