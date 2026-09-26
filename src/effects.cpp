@@ -25,11 +25,47 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QMap>
 #include <QSettings>
 #include <QStandardPaths>
 #include <QVariantMap>
 
+#include <KConfig>
+#include <KConfigGroup>
+
 #include <optional>
+
+// KWin's ElectricBorder numbers for the corners; 9 is ElectricNone
+static const QMap<QString, int> s_corners = {
+    {QStringLiteral("TopRight"), 1},
+    {QStringLiteral("BottomRight"), 3},
+    {QStringLiteral("BottomLeft"), 5},
+    {QStringLiteral("TopLeft"), 7},
+};
+static constexpr int s_noBorder = 9;
+
+// kwinrc lists of borders that trigger something. A corner is taken out of every
+// one of them before it gets its new action, so it never does two things at once.
+struct BorderList {
+    const char *group;
+    const char *key;
+    const char *action;  // the hot corner choice this list stands for, if any
+    const char *plugin;  // effect or script that has to be on for it to work
+    QList<int> defaults; // KWin's default when kwinrc doesn't say
+};
+static const BorderList s_borderLists[] = {
+    {"Effect-overview", "BorderActivate", "overview", "overview", {7}},
+    {"Effect-overview", "GridBorderActivate", nullptr, nullptr, {}},
+    {"Effect-windowview", "BorderActivate", "windowview", "windowview", {}},
+    {"Effect-windowview", "BorderActivateAll", nullptr, nullptr, {}},
+    {"Effect-windowview", "BorderActivateClass", nullptr, nullptr, {}},
+    {"Effect-windowview", "BorderActivateClassCurrentDesktop", nullptr, nullptr, {}},
+    {"TabBox", "BorderActivate", nullptr, nullptr, {}},
+    {"TabBox", "BorderAlternativeActivate", nullptr, nullptr, {}},
+    // lingmo-kwin-plugins' linghotcorners script
+    {"Script-linghotcorners", "Launcher", "launcher", "linghotcorners", {}},
+    {"Script-linghotcorners", "LockScreen", "lockscreen", "linghotcorners", {}},
+};
 
 Effects::Effects(QObject *parent)
     : QObject(parent)
@@ -119,6 +155,67 @@ bool Effects::isSupported(const QString &id) const
         return true;
     const QDBusReply<bool> reply = effects.call("isEffectSupported", id);
     return !reply.isValid() || reply.value();
+}
+
+QString Effects::cornerAction(const QString &corner) const
+{
+    if (!s_corners.contains(corner))
+        return QStringLiteral("none");
+    const int border = s_corners.value(corner);
+
+    // Reads the user's kwinrc over the system ones, like KWin
+    KConfig kwinrc(QStringLiteral("kwinrc"));
+    const QString builtin = kwinrc.group(QStringLiteral("ElectricBorders")).readEntry(corner, QString()).toLower();
+    if (builtin == QLatin1String("showdesktop"))
+        return QStringLiteral("showdesktop");
+
+    for (const BorderList &list : s_borderLists) {
+        if (list.action && kwinrc.group(list.group).readEntry(list.key, list.defaults).contains(border))
+            return QString::fromLatin1(list.action);
+    }
+    return QStringLiteral("none");
+}
+
+void Effects::setCornerAction(const QString &corner, const QString &action)
+{
+    if (!s_corners.contains(corner) || action == cornerAction(corner))
+        return;
+    const int border = s_corners.value(corner);
+
+    KConfig kwinrc(QStringLiteral("kwinrc"));
+    KConfigGroup builtin = kwinrc.group(QStringLiteral("ElectricBorders"));
+    const QString builtinAction = action == QLatin1String("showdesktop") ? QStringLiteral("ShowDesktop") : QStringLiteral("None");
+    if (builtin.readEntry(corner, QStringLiteral("None")) != builtinAction)
+        builtin.writeEntry(corner, builtinAction);
+
+    QString plugin;
+    for (const BorderList &list : s_borderLists) {
+        KConfigGroup group = kwinrc.group(list.group);
+        // 0..7 are the edges and corners: drop "none" (8, 9) and duplicates
+        QList<int> current;
+        for (int value : group.readEntry(list.key, list.defaults)) {
+            if (value >= 0 && value < 8 && !current.contains(value))
+                current << value;
+        }
+        QList<int> borders = current;
+        borders.removeAll(border);
+        if (list.action && action == QLatin1String(list.action)) {
+            borders << border;
+            plugin = QString::fromLatin1(list.plugin);
+        }
+        if (borders != current)
+            group.writeEntry(list.key, borders.isEmpty() ? QList<int>{s_noBorder} : borders);
+    }
+
+    // A corner can't work while its effect or script is off
+    if (!plugin.isEmpty() && !isEnabled(plugin))
+        kwinrc.group(QStringLiteral("Plugins")).writeEntry(plugin + QStringLiteral("Enabled"), true);
+
+    kwinrc.sync();
+    m_kwinrc->sync();
+    reloadKWin();
+    ++m_revision;
+    emit changed();
 }
 
 QString Effects::switcherLayout() const

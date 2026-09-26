@@ -24,8 +24,8 @@
 
 class QSettings;
 
-// KWin effects and the Alt+Tab layout, for the Effects page. Effects are turned on
-// and off in kwinrc's [Plugins] group and KWin is told to reload.
+// KWin effects, the Alt+Tab layout and the hot corners, for the Effects page. Effects
+// are turned on and off in kwinrc's [Plugins] group and KWin is told to reload.
 class Effects : public QObject
 {
     Q_OBJECT
@@ -42,6 +42,11 @@ public:
     Q_INVOKABLE void setEnabledMany(const QVariantMap &states);
     // False when KWin can't run it here (no GPU acceleration)
     Q_INVOKABLE bool isSupported(const QString &id) const;
+
+    // Hot corners: corner is "TopLeft", "TopRight", "BottomLeft" or "BottomRight"; action
+    // is "none", "overview", "windowview", "showdesktop", "launcher" or "lockscreen"
+    Q_INVOKABLE QString cornerAction(const QString &corner) const;
+    Q_INVOKABLE void setCornerAction(const QString &corner, const QString &action);
 
     QString switcherLayout() const;
     void setSwitcherLayout(const QString &layout);

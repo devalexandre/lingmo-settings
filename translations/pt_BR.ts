@@ -2008,6 +2008,50 @@
         <translation>Alternador de janelas (Alt+Tab)</translation>
     </message>
     <message>
+        <source>Nothing</source>
+        <translation>Nada</translation>
+    </message>
+    <message>
+        <source>See all windows</source>
+        <translation>Ver todas as janelas</translation>
+    </message>
+    <message>
+        <source>Current windows</source>
+        <translation>Janelas atuais</translation>
+    </message>
+    <message>
+        <source>Open the launcher</source>
+        <translation>Abrir o lançador</translation>
+    </message>
+    <message>
+        <source>Lock screen</source>
+        <translation>Bloquear tela</translation>
+    </message>
+    <message>
+        <source>Hot corners</source>
+        <translation>Cantos ativos</translation>
+    </message>
+    <message>
+        <source>Push the pointer into a corner of the screen to run an action.</source>
+        <translation>Leve o ponteiro até um canto da tela para executar uma ação.</translation>
+    </message>
+    <message>
+        <source>Top left</source>
+        <translation>Superior esquerdo</translation>
+    </message>
+    <message>
+        <source>Top right</source>
+        <translation>Superior direito</translation>
+    </message>
+    <message>
+        <source>Bottom left</source>
+        <translation>Inferior esquerdo</translation>
+    </message>
+    <message>
+        <source>Bottom right</source>
+        <translation>Inferior direito</translation>
+    </message>
+    <message>
         <source>Strip</source>
         <translation>Faixa</translation>
     </message>

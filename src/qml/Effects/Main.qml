@@ -90,6 +90,47 @@ ItemPage {
         }
     }
 
+    // What a screen corner does when the pointer is pushed into it
+    component CornerChoice: ColumnLayout {
+        id: cornerChoice
+        property string corner
+        property alias title: cornerLabel.text
+
+        Layout.fillWidth: true
+        spacing: LingmoUI.Units.smallSpacing
+
+        Label {
+            id: cornerLabel
+        }
+
+        ComboBox {
+            Layout.fillWidth: true
+            textRole: "text"
+            valueRole: "value"
+            model: cornerActions
+            // indexOfValue() isn't ready while the page loads: look the action up in the model
+            currentIndex: {
+                var action = effects.revision >= 0 ? effects.cornerAction(cornerChoice.corner) : "none"
+                for (var i = 0; i < cornerActions.count; ++i) {
+                    if (cornerActions.get(i).value === action)
+                        return i
+                }
+                return 0
+            }
+            onActivated: effects.setCornerAction(cornerChoice.corner, currentValue)
+        }
+    }
+
+    ListModel {
+        id: cornerActions
+        ListElement { value: "none"; text: qsTr("Nothing") }
+        ListElement { value: "overview"; text: qsTr("See all windows") }
+        ListElement { value: "windowview"; text: qsTr("Current windows") }
+        ListElement { value: "showdesktop"; text: qsTr("Show desktop") }
+        ListElement { value: "launcher"; text: qsTr("Open the launcher") }
+        ListElement { value: "lockscreen"; text: qsTr("Lock screen") }
+    }
+
     Scrollable {
         anchors.fill: parent
         contentHeight: layout.implicitHeight
@@ -182,6 +223,43 @@ ItemPage {
                     effectId: "lingmo_popups"
                     title: qsTr("Animated menus")
                     description: qsTr("Menus and tooltips fade and grow in")
+                }
+            }
+
+            RoundedItem {
+                Label {
+                    text: qsTr("Hot corners")
+                    color: LingmoUI.Theme.disabledTextColor
+                }
+
+                Label {
+                    Layout.fillWidth: true
+                    wrapMode: Text.WordWrap
+                    text: qsTr("Push the pointer into a corner of the screen to run an action.")
+                }
+
+                GridLayout {
+                    Layout.fillWidth: true
+                    columns: 2
+                    columnSpacing: LingmoUI.Units.largeSpacing * 2
+                    rowSpacing: LingmoUI.Units.largeSpacing
+
+                    CornerChoice {
+                        corner: "TopLeft"
+                        title: qsTr("Top left")
+                    }
+                    CornerChoice {
+                        corner: "TopRight"
+                        title: qsTr("Top right")
+                    }
+                    CornerChoice {
+                        corner: "BottomLeft"
+                        title: qsTr("Bottom left")
+                    }
+                    CornerChoice {
+                        corner: "BottomRight"
+                        title: qsTr("Bottom right")
+                    }
                 }
             }
 
