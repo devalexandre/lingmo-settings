@@ -278,6 +278,102 @@ ItemPage {
                     visible: _screenView.count > 0
                 }
 
+                // The monitors as they are arranged: click one to set it up below
+                Item {
+                    id: arrangement
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 160
+                    visible: _screenView.count > 1
+
+                    property int revision: 0
+                    readonly property rect bounds: {
+                        var x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity
+                        for (var i = 0; revision >= 0 && i < monitorRepeater.count; ++i) {
+                            var item = monitorRepeater.itemAt(i)
+                            if (!item)
+                                continue
+                            x0 = Math.min(x0, item.geo.x)
+                            y0 = Math.min(y0, item.geo.y)
+                            x1 = Math.max(x1, item.geo.x + item.geo.width)
+                            y1 = Math.max(y1, item.geo.y + item.geo.height)
+                        }
+                        return x1 > x0 ? Qt.rect(x0, y0, x1 - x0, y1 - y0) : Qt.rect(0, 0, 1, 1)
+                    }
+                    readonly property real factor: Math.min(width / bounds.width, height / bounds.height)
+                    readonly property real offsetX: (width - bounds.width * factor) / 2
+                    readonly property real offsetY: (height - bounds.height * factor) / 2
+
+                    Repeater {
+                        id: monitorRepeater
+                        model: screen.outputModel
+                        onItemAdded: arrangement.revision++
+                        onItemRemoved: arrangement.revision++
+
+                        delegate: Rectangle {
+                            id: monitor
+                            // Disabled monitors have no size: draw them as 1080p
+                            readonly property rect geo: Qt.rect(model.normalizedPosition.x, model.normalizedPosition.y,
+                                                                model.size.width > 0 ? model.size.width : 1920,
+                                                                model.size.height > 0 ? model.size.height : 1080)
+                            readonly property bool current: index === _screenView.currentIndex
+                            // The model's name reads "Maker Model (CONNECTOR)"
+                            readonly property string connector: {
+                                var m = /\(([^)]+)\)$/.exec(model.display)
+                                return m ? m[1] : model.display
+                            }
+
+                            onGeoChanged: arrangement.revision++
+
+                            x: arrangement.offsetX + (geo.x - arrangement.bounds.x) * arrangement.factor + 3
+                            y: arrangement.offsetY + (geo.y - arrangement.bounds.y) * arrangement.factor + 3
+                            width: geo.width * arrangement.factor - 6
+                            height: geo.height * arrangement.factor - 6
+                            radius: LingmoUI.Theme.smallRadius
+                            opacity: model.enabled ? 1 : 0.5
+                            color: current ? LingmoUI.Theme.highlightColor : LingmoUI.Theme.secondBackgroundColor
+                            border.width: 1
+                            border.color: current ? LingmoUI.Theme.highlightColor
+                                                  : Qt.rgba(LingmoUI.Theme.textColor.r, LingmoUI.Theme.textColor.g,
+                                                            LingmoUI.Theme.textColor.b, 0.15)
+
+                            Behavior on color {
+                                ColorAnimation { duration: 150 }
+                            }
+
+                            ColumnLayout {
+                                anchors.centerIn: parent
+                                width: parent.width - LingmoUI.Units.smallSpacing * 2
+                                spacing: 0
+
+                                Label {
+                                    Layout.fillWidth: true
+                                    horizontalAlignment: Text.AlignHCenter
+                                    elide: Text.ElideRight
+                                    text: monitor.connector
+                                    font.bold: true
+                                    color: monitor.current ? LingmoUI.Theme.highlightedTextColor : LingmoUI.Theme.textColor
+                                }
+
+                                Label {
+                                    Layout.fillWidth: true
+                                    horizontalAlignment: Text.AlignHCenter
+                                    elide: Text.ElideRight
+                                    visible: model.primary || !model.enabled
+                                    text: !model.enabled ? qsTr("Off") : qsTr("Primary")
+                                    font.pointSize: LingmoUI.Theme.smallFont.pointSize
+                                    color: monitor.current ? LingmoUI.Theme.highlightedTextColor : LingmoUI.Theme.disabledTextColor
+                                }
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: _screenView.currentIndex = index
+                            }
+                        }
+                    }
+                }
+
                 ListView {
                     id: _screenView
                     Layout.fillWidth: true
@@ -463,7 +559,8 @@ ItemPage {
                     currentIndex: _screenView.currentIndex
                     onCurrentIndexChanged: _screenView.currentIndex = currentIndex
                     interactive: true
-                    visible: count > 1
+                    // The arrangement above picks the monitor
+                    visible: false
                 }
             }
 
