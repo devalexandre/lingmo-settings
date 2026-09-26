@@ -422,8 +422,11 @@ ItemPage {
                                 }
                                 onPositionChanged: (mouse) => {
                                     var p = mapToItem(arrangement, mouse.x, mouse.y)
-                                    monitor.dragX = p.x - start.x
-                                    monitor.dragY = p.y - start.y
+                                    // Stay inside the drawing
+                                    var baseX = monitor.x - monitor.dragX
+                                    var baseY = monitor.y - monitor.dragY
+                                    monitor.dragX = Math.max(-baseX, Math.min(arrangement.width - monitor.width - baseX, p.x - start.x))
+                                    monitor.dragY = Math.max(-baseY, Math.min(arrangement.height - monitor.height - baseY, p.y - start.y))
                                 }
                                 onReleased: {
                                     var moved = Math.abs(monitor.dragX) + Math.abs(monitor.dragY) > 4
