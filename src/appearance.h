@@ -38,6 +38,10 @@ class Appearance : public QObject
     Q_PROPERTY(bool dockRoundedWindow READ dockRoundedWindow WRITE setDockRoundedWindow NOTIFY dockRoundedWindowChanged)
     Q_PROPERTY(bool systemEffects READ systemEffects WRITE setSystemEffects NOTIFY systemEffectsChanged)
     Q_PROPERTY(int minimiumAnimation READ minimiumAnimation WRITE setMinimiumAnimation NOTIFY minimiumAnimationChanged)
+    // KWin's wobbly windows: windows jiggle like jelly while they are dragged
+    Q_PROPERTY(bool wobblyWindows READ wobblyWindows WRITE setWobblyWindows NOTIFY wobblyWindowsChanged)
+    // KWin only runs it with GPU acceleration (not on software rendering, e.g. VMs without 3D)
+    Q_PROPERTY(bool wobblyWindowsSupported READ wobblyWindowsSupported CONSTANT)
 
 public:
     explicit Appearance(QObject *parent = nullptr);
@@ -82,6 +86,10 @@ public:
     int minimiumAnimation() const;
     void setMinimiumAnimation(int minimiumAnimation);
 
+    bool wobblyWindows() const;
+    void setWobblyWindows(bool enabled);
+    bool wobblyWindowsSupported() const;
+
 signals:
     void dockIconSizeChanged();
     void dockDirectionChanged();
@@ -94,6 +102,7 @@ signals:
     void dockRoundedWindowChanged();
     void systemEffectsChanged();
     void minimiumAnimationChanged();
+    void wobblyWindowsChanged();
 
 private:
     QDBusInterface m_interface;
@@ -111,6 +120,7 @@ private:
 
     bool m_systemEffects;
     int m_minimiumAnimation;
+    bool m_wobblyWindows = false;
 };
 
 #endif // APPEARANCE_H

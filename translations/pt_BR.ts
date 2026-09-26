@@ -1765,4 +1765,22 @@
         <translation>Não foi possível criar a entrada</translation>
     </message>
 </context>
+<context>
+    <name>Main</name>
+    <message>
+        <source>Wobbly windows</source>
+        <translation>Janelas gelatinosas</translation>
+    </message>
+    <message>
+        <source>Windows jiggle like jelly while you drag them</source>
+        <translation>As janelas balançam como gelatina ao serem arrastadas</translation>
+    </message>
+</context>
+<context>
+    <name>Main</name>
+    <message>
+        <source>Requires video acceleration (GPU)</source>
+        <translation>Requer aceleração de vídeo (GPU)</translation>
+    </message>
+</context>
 </TS>

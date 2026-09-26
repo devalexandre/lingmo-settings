@@ -54,6 +54,7 @@ Appearance::Appearance(QObject *parent)
     m_kwinSettings->endGroup();
     m_kwinSettings->beginGroup("Plugins");
     m_minimiumAnimation = m_kwinSettings->value("magiclampEnabled").toBool() ? 1 : 0;
+    m_wobblyWindows = m_kwinSettings->value("wobblywindowsEnabled", false).toBool();
     m_kwinSettings->endGroup();
 
     // Init
@@ -305,5 +306,32 @@ void Appearance::setMinimiumAnimation(int minimiumAnimation)
         m_kwinSettings->sync();
         QDBusInterface("org.kde.KWin", "/KWin").call("reconfigure");
         emit minimiumAnimationChanged();
+    }
+}
+
+bool Appearance::wobblyWindowsSupported() const
+{
+    QDBusInterface effects("org.kde.KWin", "/Effects", "org.kde.kwin.Effects");
+    if (!effects.isValid())
+        return true;
+    const QDBusReply<bool> reply = effects.call("isEffectSupported", QStringLiteral("wobblywindows"));
+    return !reply.isValid() || reply.value();
+}
+
+bool Appearance::wobblyWindows() const
+{
+    return m_wobblyWindows;
+}
+
+void Appearance::setWobblyWindows(bool enabled)
+{
+    if (m_wobblyWindows != enabled) {
+        m_wobblyWindows = enabled;
+        m_kwinSettings->beginGroup("Plugins");
+        m_kwinSettings->setValue("wobblywindowsEnabled", enabled);
+        m_kwinSettings->endGroup();
+        m_kwinSettings->sync();
+        QDBusInterface("org.kde.KWin", "/KWin").call("reconfigure");
+        emit wobblyWindowsChanged();
     }
 }
