@@ -87,6 +87,303 @@
     </message>
 </context>
 <context>
+    <name>FaceAuth</name>
+    <message>
+        <location filename="../src/faceauth.cpp" line="+310"/>
+        <source>Couldn&apos;t delete %1.</source>
+        <translation>Não foi possível excluir %1.</translation>
+    </message>
+    <message>
+        <location line="+122"/>
+        <source>You are not authorized to change this setting.</source>
+        <translation>Você não tem autorização para alterar esta configuração.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+5"/>
+        <source>Couldn&apos;t change face recognition: %1</source>
+        <translation>Não foi possível alterar o reconhecimento facial: %1</translation>
+    </message>
+</context>
+<context>
+    <name>FaceEnrollDialog</name>
+    <message>
+        <location filename="../src/qml/User/FaceEnrollDialog.qml" line="+43"/>
+        <source>Register face</source>
+        <translation>Cadastrar rosto</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Look straight at the camera</source>
+        <translation>Olhe direto para a câmera</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Now turn your head slowly a little to each side</source>
+        <translation>Agora vire a cabeça devagar, um pouco para cada lado</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>No face found: sit in front of the camera</source>
+        <translation>Nenhum rosto encontrado: sente-se de frente para a câmera</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Come a little closer</source>
+        <translation>Chegue um pouco mais perto</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Only you should be in front of the camera</source>
+        <translation>Só você deve estar na frente da câmera</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Hold still for a moment</source>
+        <translation>Fique parado por um instante</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>It&apos;s too dark: turn on a light or face a window</source>
+        <translation>Está escuro demais: acenda uma luz ou fique de frente para uma janela</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Look at the camera</source>
+        <translation>Olhe para a câmera</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>The camera is being used by another program, a video call perhaps. Close it and try again.</source>
+        <translation>A câmera está sendo usada por outro programa, talvez uma chamada de vídeo. Feche-o e tente de novo.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>The camera couldn&apos;t be opened.</source>
+        <translation>Não foi possível abrir a câmera.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>The face recognition models are missing. Reinstall lingmo-camera.</source>
+        <translation>Os modelos de reconhecimento facial estão faltando. Reinstale o lingmo-camera.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Your face couldn&apos;t be seen well enough. Try again facing the camera, with more light.</source>
+        <translation>Não foi possível ver seu rosto bem o bastante. Tente de novo de frente para a câmera, com mais luz.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Your face couldn&apos;t be saved.</source>
+        <translation>Não foi possível salvar seu rosto.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Cancelled.</source>
+        <translation>Cancelado.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Face recognition failed. Try again.</source>
+        <translation>O reconhecimento facial falhou. Tente de novo.</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>You can now turn on face login below. If it&apos;s already on, the new registration is used right away.</source>
+        <translation>Agora você pode ativar a entrada com o rosto logo abaixo. Se já estiver ativada, o novo cadastro passa a valer na hora.</translation>
+    </message>
+    <message>
+        <location line="+71"/>
+        <source>Sit in front of the camera in good light. It takes a few seconds: look at the camera, then turn your head slowly a little to each side. No photo is kept.</source>
+        <translation>Sente-se de frente para a câmera, com boa luz. Leva alguns segundos: olhe para a câmera e depois vire a cabeça devagar, um pouco para cada lado. Nenhuma foto é guardada.</translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Face registered</source>
+        <translation>Rosto cadastrado</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Registration failed</source>
+        <translation>Falha no cadastro</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Close</source>
+        <translation>Fechar</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Try again</source>
+        <translation>Tentar novamente</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Start</source>
+        <translation>Começar</translation>
+    </message>
+</context>
+<context>
+    <name>FaceSection</name>
+    <message>
+        <location filename="../src/qml/User/FaceSection.qml" line="+50"/>
+        <source>Recognized: it&apos;s you.</source>
+        <translation>Reconhecido: é você.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Your face was found, but it didn&apos;t move. Turn or nod your head a little while the camera looks.</source>
+        <translation>Seu rosto foi encontrado, mas não se mexeu. Vire ou incline um pouco a cabeça enquanto a câmera olha.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Not recognized. Try with more light, or register your face again.</source>
+        <translation>Não reconhecido. Tente com mais luz ou cadastre seu rosto de novo.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The camera is being used by another program.</source>
+        <translation>A câmera está sendo usada por outro programa.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>No camera was found.</source>
+        <translation>Nenhuma câmera foi encontrada.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+203"/>
+        <source>Register your face first.</source>
+        <translation>Cadastre seu rosto primeiro.</translation>
+    </message>
+    <message>
+        <location line="-200"/>
+        <source>The test couldn&apos;t run.</source>
+        <translation>Não foi possível fazer o teste.</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Face recognition</source>
+        <translation>Reconhecimento facial</translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>Face recognition is not installed. Install the lingmo-camera package to log in with the webcam.</source>
+        <translation>O reconhecimento facial não está instalado. Instale o pacote lingmo-camera para entrar com a webcam.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>No camera was found. Connect a webcam and open this page again to log in with your face.</source>
+        <translation>Nenhuma câmera foi encontrada. Conecte uma webcam e abra esta página de novo para entrar com o rosto.</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Face registered on %1</source>
+        <translation>Rosto cadastrado em %1</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>No face registered yet.</source>
+        <translation>Nenhum rosto cadastrado ainda.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Test</source>
+        <translation>Testar</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Look at the camera…</source>
+        <translation>Olhe para a câmera…</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+170"/>
+        <source>Delete</source>
+        <translation>Excluir</translation>
+    </message>
+    <message>
+        <location line="-155"/>
+        <source>Register again</source>
+        <translation>Cadastrar de novo</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Register face</source>
+        <translation>Cadastrar rosto</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>No photo is kept: only numbers describing your face, in your home folder.</source>
+        <translation>Nenhuma foto é guardada: só números que descrevem seu rosto, na sua pasta pessoal.</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Use your face to log in and unlock the screen</source>
+        <translation>Usar o rosto para entrar e desbloquear a tela</translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>The face-pam helper of Lingmo Settings is missing, so this can&apos;t be changed here.</source>
+        <translation>O auxiliar face-pam das Configurações do Lingmo está faltando, então isto não pode ser alterado aqui.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>The PAM module pam_exec or lingmo-faceauth is missing.</source>
+        <translation>O módulo PAM pam_exec ou o lingmo-faceauth está faltando.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Face recognition is only partly set up. Turn it on again to repair it.</source>
+        <translation>O reconhecimento facial está configurado só em parte. Ative de novo para corrigir.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The login and lock screens look for your face for a few seconds; if it isn&apos;t recognized, type your password. Turn or nod your head a little while the camera looks.</source>
+        <translation>As telas de entrada e de bloqueio procuram seu rosto por alguns segundos; se não for reconhecido, digite a senha. Vire ou incline um pouco a cabeça enquanto a câmera olha.</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Also for sudo and administrator passwords</source>
+        <translation>Também para sudo e senhas de administrador</translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>This is on for this computer, but your face isn&apos;t authorized for it yet. Turn it on to authorize it.</source>
+        <translation>Isto está ativado neste computador, mas seu rosto ainda não foi autorizado. Ative para autorizá-lo.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Warning: an ordinary webcam can be fooled by a good photo or video of you, and it has no infrared sensor to tell. With this on, whoever has one could get administrator rights on this computer. Keep it off unless you accept that risk.</source>
+        <translation>Atenção: uma webcam comum pode ser enganada por uma boa foto ou vídeo seu, e ela não tem sensor infravermelho para perceber. Com isto ativado, quem tiver um poderá obter direitos de administrador neste computador. Deixe desativado, a não ser que aceite esse risco.</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Delete your face?</source>
+        <translation>Excluir seu rosto?</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>You will have to register it again to log in with the camera. Face recognition for sudo and administrator passwords will be turned off.</source>
+        <translation>Você terá de cadastrá-lo de novo para entrar com a câmera. O reconhecimento facial para sudo e senhas de administrador será desativado.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>You will have to register it again to log in with the camera.</source>
+        <translation>Você terá de cadastrá-lo de novo para entrar com a câmera.</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+</context>
+<context>
     <name>Fingerprint</name>
     <message>
         <location filename="../src/fingerprint.cpp" line="+396"/>
@@ -1028,7 +1325,7 @@
         <translation>Usuário</translation>
     </message>
     <message>
-        <location line="+74"/>
+        <location line="+78"/>
         <source>Add new user</source>
         <translation>Adicionar novo usuário</translation>
     </message>

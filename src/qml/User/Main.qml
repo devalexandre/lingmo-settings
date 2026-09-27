@@ -86,6 +86,10 @@ ItemPage {
             FingerprintSection {
             }
 
+            // Face recognition with the webcam
+            FaceSection {
+            }
+
             // Add new user.
             RoundedItem {
                 id: newUserItem

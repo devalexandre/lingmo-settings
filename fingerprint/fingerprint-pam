@@ -12,13 +12,10 @@
 # and creates /etc/lingmo-fingerprint-enabled, which the lock screen and the
 # login screen read to show the fingerprint hint. "disable" removes exactly the
 # lines carrying the "# lingmo-fingerprint" tag and nothing else, then removes
-# the marker. Both are idempotent. Before a file is changed a copy is kept in
-# /var/lib/lingmo-settings/fingerprint-pam/backup (<service>.orig is the copy
-# taken the first time, <service>.last the one taken before the latest change).
-#
-# A service that only exists in /usr/lib/pam.d (polkit-1 on Arch) is copied to
-# /etc/pam.d first, since that copy wins; "disable" deletes the copy again when
-# nothing else was changed in it.
+# the marker. Both are idempotent. The line goes below face-pam's
+# "# lingmo-face" lines, so the camera is tried before the reader. Backups,
+# atomic writes and the polkit-1 copy: see pam-common.sh (installed next to
+# this script), shared with face-pam.
 #
 # The lock screen (lingmo-screenlocker) is not edited here: it runs its own
 # "lingmo-screenlocker-fingerprint" service next to the password one, so the
@@ -31,285 +28,26 @@
 # <dir>/usr/lib/pam.d, <dir>/usr/lib/security, ... instead of the real system.
 # It is refused when running as root.
 
-set -u
-umask 022
-export LC_ALL=C
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-
-readonly TAG='# lingmo-fingerprint'
-readonly PAM_LINE="auth       sufficient  pam_fprintd.so timeout=10  $TAG"
+readonly TAG_NAME=lingmo-fingerprint
+readonly STATE_NAME=fingerprint-pam
+readonly FOREIGN_RE='pam_fprintd\.so'
+# Face recognition (face-pam) is tried first: it gives up quickly, the reader
+# waits up to 10 seconds
+readonly SKIP_RE='#[[:space:]]*lingmo-face([[:space:]:]|$)'
 readonly SERVICES=(sddm polkit-1 sudo)
-readonly PROG=${0##*/}
 
-die() {
-    echo "$PROG: $*" >&2
-    exit 2
+pam_line() {
+    echo "auth       sufficient  pam_fprintd.so timeout=10  $TAG"
 }
 
-warn() {
-    echo "$PROG: $*" >&2
-}
+# shellcheck source=pam-common.sh
+. "${BASH_SOURCE[0]%/*}/pam-common.sh" || exit 2
 
-ROOT=""
-if [ -n "${LINGMO_FINGERPRINT_ROOT:-}" ]; then
-    [ "$(id -u)" -eq 0 ] && die "LINGMO_FINGERPRINT_ROOT is only for tests and is refused as root"
-    ROOT=${LINGMO_FINGERPRINT_ROOT%/}
-    [ -d "$ROOT" ] || die "$ROOT is not a directory"
-fi
-
-readonly PAM_DIR="$ROOT/etc/pam.d"
-readonly VENDOR_DIR="$ROOT/usr/lib/pam.d"
 readonly MARKER="$ROOT/etc/lingmo-fingerprint-enabled"
-readonly STATE_DIR="$ROOT/var/lib/lingmo-settings/fingerprint-pam"
-readonly BACKUP_DIR="$STATE_DIR/backup"
-readonly MODULE_DIRS=(
-    "$ROOT/usr/lib/security"
-    "$ROOT/usr/lib64/security"
-    "$ROOT/lib/security"
-    "$ROOT/usr/lib/x86_64-linux-gnu/security"
-    "$ROOT/lib/x86_64-linux-gnu/security"
-)
-
-TMP_FILES=()
-cleanup() {
-    local f
-    for f in "${TMP_FILES[@]}"; do
-        [ -n "$f" ] && rm -f -- "$f"
-    done
-}
-trap cleanup EXIT
-
-have_module() {
-    local d
-    for d in "${MODULE_DIRS[@]}"; do
-        [ -f "$d/pam_fprintd.so" ] && return 0
-    done
-    return 1
-}
-
-# Lines we own: a "# lingmo-fingerprint" comment, at the end of a line or as
-# a line of its own (optionally followed by ":" and text).
-readonly TAG_RE='#[[:space:]]*lingmo-fingerprint([[:space:]:]|$)'
-
-has_tag() {
-    grep -Eq -- "$TAG_RE" "$1"
-}
-
-# A pam_fprintd auth line that someone else added (not tagged by us).
-has_foreign_fprintd() {
-    grep -v -E -- "$TAG_RE" "$1" |
-        grep -Eiq '^[[:space:]]*-?auth[[:space:]].*pam_fprintd\.so'
-}
-
-has_auth_line() {
-    grep -Eiq '^[[:space:]]*-?auth[[:space:]]' "$1"
-}
-
-strip_tagged() {
-    grep -v -E -- "$TAG_RE" "$1"
-    return 0
-}
-
-# Print $1 with PAM_LINE inserted before the first auth line.
-insert_line() {
-    awk -v line="$PAM_LINE" '
-        !done && tolower($0) ~ /^[ \t]*-?auth[ \t]/ { print line; done = 1 }
-        { print }
-        END { if (!done) exit 3 }
-    ' "$1"
-}
-
-# Check that $1 is a PAM file we are willing to touch.
-check_file() {
-    local f=$1
-    if [ -L "$f" ]; then
-        warn "$f is a symbolic link, leaving it alone"
-        return 1
-    fi
-    if [ ! -f "$f" ]; then
-        warn "$f is not a regular file"
-        return 1
-    fi
-    if [ ! -r "$f" ]; then
-        warn "$f can't be read"
-        return 1
-    fi
-    if [ "$(stat -c %s -- "$f")" -gt 65536 ]; then
-        warn "$f is unexpectedly large, leaving it alone"
-        return 1
-    fi
-    return 0
-}
-
-backup() {
-    local svc=$1 f=$2
-    mkdir -p -- "$BACKUP_DIR" || return 1
-    chmod 700 -- "$STATE_DIR" "$BACKUP_DIR" 2>/dev/null
-    if [ ! -e "$BACKUP_DIR/$svc.orig" ]; then
-        cp -p -- "$f" "$BACKUP_DIR/$svc.orig" || return 1
-    fi
-    cp -p -- "$f" "$BACKUP_DIR/$svc.last" || return 1
-}
-
-# Atomically replace $1 with the content of $2, keeping owner and mode of
-# $3 (the file being replaced, or the vendor file it is copied from).
-replace_file() {
-    local target=$1 content=$2 ref=$3 tmp
-    tmp=$(mktemp -- "$PAM_DIR/.${target##*/}.lingmo.XXXXXX") || return 1
-    TMP_FILES+=("$tmp")
-    cat -- "$content" >"$tmp" || return 1
-    chmod --reference="$ref" -- "$tmp" 2>/dev/null || chmod 644 -- "$tmp"
-    chown --reference="$ref" -- "$tmp" 2>/dev/null
-    sync -- "$tmp" 2>/dev/null
-    mv -f -- "$tmp" "$target" || return 1
-}
-
-new_tmp() {
-    local t
-    t=$(mktemp) || die "can't create a temporary file"
-    TMP_FILES+=("$t")
-    echo "$t"
-}
-
-service_state() {
-    local svc=$1 f="$PAM_DIR/$1" src
-    if [ -e "$f" ] || [ -L "$f" ]; then
-        src=$f
-    elif [ -f "$VENDOR_DIR/$svc" ]; then
-        src="$VENDOR_DIR/$svc"
-    else
-        echo missing
-        return
-    fi
-    if [ "$src" = "$f" ] && has_tag "$f"; then
-        echo enabled
-    elif has_foreign_fprintd "$src"; then
-        echo external
-    else
-        echo disabled
-    fi
-}
-
-enable_service() {
-    local svc=$1 f="$PAM_DIR/$1" vendor="$VENDOR_DIR/$1" src ref copied=0 out orig
-
-    if [ -e "$f" ] || [ -L "$f" ]; then
-        check_file "$f" || return 1
-        src=$f
-        ref=$f
-    elif [ -f "$vendor" ]; then
-        check_file "$vendor" || return 1
-        src=$vendor
-        ref=$vendor
-        copied=1
-    else
-        echo "$svc: missing (not installed), skipped"
-        return 0
-    fi
-
-    if [ $copied -eq 0 ] && has_tag "$f"; then
-        echo "$svc: already enabled"
-        return 0
-    fi
-    if has_foreign_fprintd "$src"; then
-        echo "$svc: pam_fprintd already configured by the administrator, left alone"
-        return 0
-    fi
-    if ! has_auth_line "$src"; then
-        warn "$src has no auth line, leaving it alone"
-        return 1
-    fi
-
-    out=$(new_tmp)
-    if ! insert_line "$src" >"$out"; then
-        warn "couldn't add the fingerprint line to $src"
-        return 1
-    fi
-    if [ $copied -eq 1 ]; then
-        echo "$TAG: copy of ${vendor#"$ROOT"}, deleted again by \"$PROG disable\"" >>"$out"
-    fi
-
-    # Sanity check: the new file is the old one plus our tagged lines.
-    orig=$(new_tmp)
-    strip_tagged "$out" >"$orig"
-    if ! strip_tagged "$src" | cmp -s - "$orig"; then
-        warn "unexpected result for $svc, nothing changed"
-        return 1
-    fi
-
-    if [ $copied -eq 0 ]; then
-        backup "$svc" "$f" || { warn "couldn't back up $f, nothing changed"; return 1; }
-    else
-        # Remember what was copied, so "disable" still recognizes an unchanged
-        # copy after a package update changed the vendor file.
-        mkdir -p -- "$BACKUP_DIR" && chmod 700 -- "$STATE_DIR" "$BACKUP_DIR" 2>/dev/null
-        cp -p -- "$vendor" "$BACKUP_DIR/$svc.vendor" || { warn "couldn't back up $vendor, nothing changed"; return 1; }
-    fi
-    replace_file "$f" "$out" "$ref" || { warn "couldn't write $f"; return 1; }
-    echo "$svc: enabled"
-}
-
-disable_service() {
-    local svc=$1 f="$PAM_DIR/$1" vendor="$VENDOR_DIR/$1" out copied=0
-
-    if [ ! -e "$f" ] && [ ! -L "$f" ]; then
-        echo "$svc: nothing to do"
-        return 0
-    fi
-    check_file "$f" || return 1
-    if ! has_tag "$f"; then
-        echo "$svc: already disabled"
-        return 0
-    fi
-    grep -Eq -- "^$TAG:" "$f" && copied=1
-
-    out=$(new_tmp)
-    strip_tagged "$f" >"$out"
-
-    backup "$svc" "$f" || { warn "couldn't back up $f, nothing changed"; return 1; }
-
-    if [ $copied -eq 1 ] && { { [ -f "$vendor" ] && cmp -s -- "$out" "$vendor"; } ||
-            { [ -f "$BACKUP_DIR/$svc.vendor" ] && cmp -s -- "$out" "$BACKUP_DIR/$svc.vendor"; }; }; then
-        # Our own copy of the vendor file and nothing else changed in it.
-        rm -f -- "$f" "$BACKUP_DIR/$svc.vendor" || { warn "couldn't remove $f"; return 1; }
-        echo "$svc: disabled (removed the copy of ${vendor#"$ROOT"})"
-        return 0
-    fi
-    if [ ! -s "$out" ] || ! has_auth_line "$out"; then
-        warn "$f would be left without an auth line, nothing changed"
-        return 1
-    fi
-    replace_file "$f" "$out" "$f" || { warn "couldn't write $f"; return 1; }
-    echo "$svc: disabled"
-}
-
-write_marker() {
-    local out
-    mkdir -p -- "${MARKER%/*}" || return 1
-    out=$(new_tmp)
-    {
-        echo "# Written by $PROG: fingerprint authentication is enabled."
-        echo "# Remove it with \"$PROG disable\"."
-    } >"$out"
-    install -m 644 -- "$out" "$MARKER"
-}
-
-lock() {
-    mkdir -p -- "$STATE_DIR" || die "can't create $STATE_DIR"
-    chmod 700 -- "$STATE_DIR" 2>/dev/null
-    exec 9>"$STATE_DIR/lock" || die "can't open the lock file"
-    flock -w 30 9 || die "another instance is running"
-}
-
-need_root() {
-    if [ -z "$ROOT" ] && [ "$(id -u)" -ne 0 ]; then
-        die "must be run as root (pkexec $0 $1)"
-    fi
-}
 
 cmd_status() {
     local svc st enabled=0 disabled=0 marker=absent
-    if have_module; then
+    if have_module pam_fprintd.so; then
         echo "module: present"
     else
         echo "module: missing"
@@ -336,7 +74,7 @@ cmd_status() {
 cmd_enable() {
     local svc failed=0 done_any=0 st
     need_root enable
-    have_module || die "pam_fprintd.so not found: install the fprintd package first"
+    have_module pam_fprintd.so || die "pam_fprintd.so not found: install the fprintd package first"
     [ -d "$PAM_DIR" ] || die "$PAM_DIR doesn't exist"
     lock
     for svc in "${SERVICES[@]}"; do
@@ -348,7 +86,7 @@ cmd_enable() {
         fi
     done
     if [ $done_any -eq 1 ]; then
-        write_marker || { warn "couldn't write $MARKER"; failed=1; }
+        write_marker "$MARKER" "fingerprint authentication is enabled." || { warn "couldn't write $MARKER"; failed=1; }
     else
         warn "no PAM service could be set up"
         failed=1

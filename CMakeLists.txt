@@ -118,3 +118,7 @@ install(FILES "tools/auto-install-policy/org.lingmo.settings.update.lminstall.po
 # Fingerprint login: PAM helper run through pkexec (the policy names its path)
 install(PROGRAMS fingerprint/fingerprint-pam DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}")
 install(FILES fingerprint/org.lingmo.settings.fingerprint-pam.policy DESTINATION "${CMAKE_INSTALL_DATADIR}/polkit-1/actions/")
+# Face login (lingmo-faceauth from lingmo-camera): the same for pam_exec; both helpers source pam-common.sh
+install(PROGRAMS fingerprint/face-pam DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}")
+install(FILES fingerprint/pam-common.sh DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}")
+install(FILES fingerprint/org.lingmo.settings.face-pam.policy DESTINATION "${CMAKE_INSTALL_DATADIR}/polkit-1/actions/")
